@@ -1,6 +1,6 @@
 library values;
 export 'package:unhorizons/data_logic/models/course_category.dart';
-export 'app_theme.dart';
+export 'values/colors_theme.dart';
 import 'dart:ui';
 
 

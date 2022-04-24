@@ -27,6 +27,9 @@ dependencies:
   utils_component:
     git:
       url: https://github.com/lordyhas/utils_component
+  university_data_model:
+    git:
+      url: https://github.com/lordyhas/university_data_model
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../data_logic/app_theme.dart';
+import '../data_logic/values/colors_theme.dart';
 
 class CourseInfoScreen extends StatefulWidget {
   const CourseInfoScreen({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:unhorizons/res.dart';
-import '../data_logic/app_theme.dart';
+import '../data_logic/values/colors_theme.dart';
 
 class UserInfoScreen extends StatefulWidget {
   const UserInfoScreen({Key? key}) : super(key: key);
