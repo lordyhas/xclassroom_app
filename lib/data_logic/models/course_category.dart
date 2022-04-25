@@ -6,7 +6,6 @@ class CourseCategory {
     this.hours = 0,
     this.rating = 0.0,
   });
-
   String title;
   int lessonCredit;
   int hours;
