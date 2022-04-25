@@ -212,6 +212,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.0"
+  university_data_model:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "461fa21853416319f2f46186deed296f298e3b1a"
+      url: "https://github.com/lordyhas/university_data_model"
+    source: git
+    version: "0.0.1"
   utils_component:
     dependency: "direct main"
     description:
