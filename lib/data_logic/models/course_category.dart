@@ -13,4 +13,5 @@ class CourseCategory {
   double rating;
   String imagePath;
 
+
 }
