@@ -231,11 +231,9 @@ class CategoryView extends StatelessWidget {
                                                               .grey,
                                                     ),
                                                   ),
-                                                  const Icon(
+                                                  Icon(
                                                     Icons.star,
-                                                    color:
-                                                        AppTheme
-                                                            .nearlyBlue,
+                                                    color: Theme.of(context).primaryColor,
                                                     size: 20,
                                                   ),
                                                 ],

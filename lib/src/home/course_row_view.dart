@@ -222,11 +222,10 @@ class CategoryView extends StatelessWidget {
                                                                 .grey,
                                                       ),
                                                     ),
-                                                    const Icon(
+                                                    Icon(
                                                       Icons.star,
                                                       color:
-                                                          AppTheme
-                                                              .nearlyBlue,
+                                                          Theme.of(context).primaryColor,
                                                       size: 20,
                                                     ),
                                                   ],
@@ -247,20 +246,18 @@ class CategoryView extends StatelessWidget {
                                                 Text(
                                                   '${category.lessonCredit*15} heures',
                                                   textAlign: TextAlign.left,
-                                                  style: const TextStyle(
+                                                  style: TextStyle(
                                                     fontWeight: FontWeight.w600,
                                                     fontSize: 18,
                                                     letterSpacing: 0.27,
-                                                    color: AppTheme
-                                                        .nearlyBlue,
+                                                    color: Theme.of(context).primaryColor,
                                                   ),
                                                 ),
                                                 Container(
-                                                  decoration: const BoxDecoration(
-                                                    color: AppTheme
-                                                        .nearlyBlue,
+                                                  decoration: BoxDecoration(
+                                                    color: Theme.of(context).primaryColor,
                                                     borderRadius:
-                                                        BorderRadius.all(
+                                                        const BorderRadius.all(
                                                             Radius.circular(
                                                                 8.0)),
                                                   ),

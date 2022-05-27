@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unhorizons/src/home/home_page.dart';
+import 'package:unhorizons/data_logic/values.dart';
+import 'package:unhorizons/src/home_page.dart';
 
 import 'data_logic/controller/switch_home_bloc/switch_home_cubit.dart';
 
@@ -27,9 +28,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'UNH',
-          theme: ThemeData(
-            primaryColor: Colors.cyan.shade800,
-          ),
+          theme: AppTheme.themeLight,
           home:
               const HomePage() //const MyHomePage(title: 'Flutter Demo Home Page'),
           ),

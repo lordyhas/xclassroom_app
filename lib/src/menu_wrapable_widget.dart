@@ -119,7 +119,7 @@ class _MenuWrappedState extends State<MenuWrapped>
                 topRight: radiusAnim.value?.topRight,
               ) // r,
                   ),
-              color: AppTheme.nearlyBlue, //Color(0xfffB2EBF2),
+              color:  Theme.of(context).primaryColor, //Color(0xfffB2EBF2),
               clipBehavior: Clip.antiAlias,
               child: InkWell(
                 onTap: () => _onTap(),

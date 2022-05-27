@@ -28,6 +28,11 @@ class AppTheme {
     caption: caption,
   );
 
+  static ThemeData get themeLight => ThemeData(
+      primaryColor: Colors.cyan.shade700,
+      textTheme: textTheme,
+  );
+
   static const TextStyle display1 = TextStyle(
     // h4 -> display1
     fontFamily: 'WorkSans',
@@ -91,4 +96,6 @@ class AppTheme {
     letterSpacing: 0.2,
     color: lightText, // was lightText
   );
+
+
 }

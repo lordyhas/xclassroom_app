@@ -3,16 +3,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter/material.dart';
 
-import '../../data_logic/controller/bloc_controller.dart';
-import '../../data_logic/values.dart';
-import '../../data_logic/values/colors_theme.dart';
+import '../data_logic/controller/bloc_controller.dart';
+import '../data_logic/values.dart';
+import '../data_logic/values/colors_theme.dart';
 
-import '../user_info_screen.dart';
-import '../menu_wrapable_widget.dart';
-import 'course_grid_view.dart';
-import 'course_row_view.dart';
+import 'user_info_screen.dart';
+import 'menu_wrapable_widget.dart';
+import 'home/course_grid_view.dart';
+import 'home/course_row_view.dart';
 
-part 'home_screen.dart';
+part 'home/home_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -239,10 +239,10 @@ class ButtonTabBar extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             color: isSelected
-                ? AppTheme.nearlyBlue
-                : AppTheme.nearlyWhite,
+                ? Theme.of(context).primaryColor
+                :  AppTheme.nearlyWhite,
             borderRadius: const BorderRadius.all(Radius.circular(24.0)),
-            border: Border.all(color: AppTheme.nearlyBlue)),
+            border: Border.all(color: Theme.of(context).primaryColor)),
         child: Material(
           color: Colors.transparent,
           child: InkWell(
@@ -265,7 +265,7 @@ class ButtonTabBar extends StatelessWidget {
                     letterSpacing: 0.27,
                     color: isSelected
                         ? AppTheme.nearlyWhite
-                        : AppTheme.nearlyBlue,
+                        : Theme.of(context).primaryColor,
                   ),
                 ),
               ),
