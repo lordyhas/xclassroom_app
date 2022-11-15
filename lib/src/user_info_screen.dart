@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-import 'package:unhorizons/res.dart';
-import '../data_logic/values/colors_theme.dart';
+part of home;
+
 
 class UserInfoScreen extends StatefulWidget {
   const UserInfoScreen({Key? key}) : super(key: key);
@@ -9,7 +8,18 @@ class UserInfoScreen extends StatefulWidget {
   _UserInfoScreenState createState() => _UserInfoScreenState();
 }
 
-class _UserInfoScreenState extends State<UserInfoScreen>
+class _UserInfoScreenState extends State<UserInfoScreen>{
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      body: Container(
+
+      ),
+    );
+  }
+}
+
+class _OldUserInfoScreenState extends State<UserInfoScreen>
     with TickerProviderStateMixin {
   final double infoHeight = 364.0;
   late AnimationController animationController;
@@ -49,307 +59,302 @@ class _UserInfoScreenState extends State<UserInfoScreen>
     final double tempHeight = MediaQuery.of(context).size.height -
         (MediaQuery.of(context).size.width / 1.2) +
         24.0;
-    return Container(
-      color: AppTheme.nearlyWhite,
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Stack(
-          children: <Widget>[
-            Column(
-              children: [
-                Container(
-                  child: Stack(
-                    children: <Widget>[
-                      AspectRatio(
-                        aspectRatio: 1.2,
-                        child: Image.asset(Res.webInterFace),
-                      ),
-                      Container(
-                        color: Colors.grey.shade700.withOpacity(0.5),
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height*0.50,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0,
-                          vertical: 16.0,
-                        ),
-                        width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height*0.30,
-                        child: ClipRRect(
-                          
-                          child: Container(
-                              color: AppTheme.nearlyBlue,
-                              child: const Icon(Icons.person, size: 42,)
-                          ),
-                        ) /*Container(
-                          height: 0,
-                          width: 0,
-                          decoration: BoxDecoration(
-                            color: AppTheme.nearlyBlue,
-                            borderRadius: BorderRadius.circular(30),
-                            /*image: DecorationImage(
-                                image: AssetImage(Res.userImage)
-                            ),*/
-                          ),
-                          child: Icon(Icons.person, size: 42,),
-                            
-                            //child: Image.asset(Res.userImage)
-                        ),*/
-                      )
-                    ],
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Stack(
+        children: <Widget>[
+          Column(
+            children: [
+              Stack(
+                children: <Widget>[
+                  AspectRatio(
+                    aspectRatio: 1.2,
+                    child: Image.asset(Res.webInterFace),
                   ),
-                ),
-              ],
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: MediaQuery.of(context).size.height*0.75,
-                decoration: BoxDecoration(
-                  color: AppTheme.nearlyWhite,
-                  borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(32.0),
-                      topRight: Radius.circular(32.0)),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                        color: AppTheme.grey.withOpacity(0.2),
-                        offset: const Offset(1.1, 1.1),
-                        blurRadius: 10.0),
-                  ],
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 8, right: 8),
-                  child: SingleChildScrollView(
-                    child: Container(
-                      constraints: BoxConstraints(
-                          minHeight: infoHeight,
-                          maxHeight: tempHeight > infoHeight
-                              ? tempHeight
-                              : infoHeight),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          const Padding(
-                            padding: EdgeInsets.only(
-                                top: 32.0, left: 18, right: 16),
-                            child: Text(
-                              'Student Name\nFirstname',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 22,
-                                letterSpacing: 0.27,
-                                color: AppTheme.darkerText,
+                  Container(
+                    color: Colors.grey.shade700.withOpacity(0.5),
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height*0.50,
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 16.0,
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height*0.30,
+                    child: ClipRRect(
+
+                      child: Container(
+                          color: AppTheme.nearlyBlue,
+                          child: const Icon(Icons.person, size: 42,)
+                      ),
+                    ) /*Container(
+                      height: 0,
+                      width: 0,
+                      decoration: BoxDecoration(
+                        color: AppTheme.nearlyBlue,
+                        borderRadius: BorderRadius.circular(30),
+                        /*image: DecorationImage(
+                            image: AssetImage(Res.userImage)
+                        ),*/
+                      ),
+                      child: Icon(Icons.person, size: 42,),
+
+                        //child: Image.asset(Res.userImage)
+                    ),*/
+                  )
+                ],
+              ),
+            ],
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: MediaQuery.of(context).size.height*0.75,
+              decoration: BoxDecoration(
+                color: AppTheme.nearlyWhite,
+                borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(32.0),
+                    topRight: Radius.circular(32.0)),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                      color: AppTheme.grey.withOpacity(0.2),
+                      offset: const Offset(1.1, 1.1),
+                      blurRadius: 10.0),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8, right: 8),
+                child: SingleChildScrollView(
+                  child: Container(
+                    constraints: BoxConstraints(
+                        minHeight: infoHeight,
+                        maxHeight: tempHeight > infoHeight
+                            ? tempHeight
+                            : infoHeight),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        const Padding(
+                          padding: EdgeInsets.only(
+                              top: 32.0, left: 18, right: 16),
+                          child: Text(
+                            'Student Name\nFirstname',
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              fontSize: 22,
+                              letterSpacing: 0.27,
+                              color: AppTheme.darkerText,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              left: 16, right: 16, bottom: 8, top: 16),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              const Text(
+                                '\$28.99',
+                                textAlign: TextAlign.left,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w200,
+                                  fontSize: 22,
+                                  letterSpacing: 0.27,
+                                  color: AppTheme.nearlyBlue,
+                                ),
+                              ),
+                              Container(
+                                child: Row(
+                                  children: const <Widget>[
+                                    Text(
+                                      '4.3',
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w200,
+                                        fontSize: 22,
+                                        letterSpacing: 0.27,
+                                        color: AppTheme.grey,
+                                      ),
+                                    ),
+                                    Icon(
+                                      Icons.star,
+                                      color: AppTheme.nearlyBlue,
+                                      size: 24,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        AnimatedOpacity(
+                          duration: const Duration(milliseconds: 500),
+                          opacity: opacity1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8),
+                            child: Row(
+                              children: <Widget>[
+                                getTimeBoxUI('24', 'Classe'),
+                                getTimeBoxUI('2hours', 'Time'),
+                                getTimeBoxUI('24', 'Seat'),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: AnimatedOpacity(
+                            duration: const Duration(milliseconds: 500),
+                            opacity: opacity2,
+                            child: const Padding(
+                              padding: EdgeInsets.only(
+                                  left: 16, right: 16, top: 8, bottom: 8),
+                              child: Text(
+                                'Lorem ipsum is simply dummy text of printing & typesetting industry, Lorem ipsum is simply dummy text of printing & typesetting industry.',
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w200,
+                                  fontSize: 14,
+                                  letterSpacing: 0.27,
+                                  color: AppTheme.grey,
+                                ),
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ),
-                          Padding(
+                        ),
+                        AnimatedOpacity(
+                          duration: const Duration(milliseconds: 500),
+                          opacity: opacity3,
+                          child: Padding(
                             padding: const EdgeInsets.only(
-                                left: 16, right: 16, bottom: 8, top: 16),
+                                left: 16, bottom: 16, right: 16),
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                const Text(
-                                  '\$28.99',
-                                  textAlign: TextAlign.left,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w200,
-                                    fontSize: 22,
-                                    letterSpacing: 0.27,
-                                    color: AppTheme.nearlyBlue,
+                                Container(
+                                  width: 48,
+                                  height: 48,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: AppTheme.nearlyWhite,
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(16.0),
+                                      ),
+                                      border: Border.all(
+                                          color: AppTheme.grey
+                                              .withOpacity(0.2)),
+                                    ),
+                                    child: Icon(
+                                      Icons.add,
+                                      color: AppTheme.nearlyBlue,
+                                      size: 28,
+                                    ),
                                   ),
                                 ),
-                                Container(
-                                  child: Row(
-                                    children: const <Widget>[
-                                      Text(
-                                        '4.3',
+                                const SizedBox(
+                                  width: 16,
+                                ),
+                                Expanded(
+                                  child: Container(
+                                    height: 48,
+                                    decoration: BoxDecoration(
+                                      color: AppTheme.nearlyBlue,
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(16.0),
+                                      ),
+                                      boxShadow: <BoxShadow>[
+                                        BoxShadow(
+                                            color: AppTheme
+                                                .nearlyBlue
+                                                .withOpacity(0.5),
+                                            offset: const Offset(1.1, 1.1),
+                                            blurRadius: 10.0),
+                                      ],
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        'Join Course',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
-                                          fontWeight: FontWeight.w200,
-                                          fontSize: 22,
-                                          letterSpacing: 0.27,
-                                          color: AppTheme.grey,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 18,
+                                          letterSpacing: 0.0,
+                                          color: AppTheme
+                                              .nearlyWhite,
                                         ),
                                       ),
-                                      Icon(
-                                        Icons.star,
-                                        color: AppTheme.nearlyBlue,
-                                        size: 24,
-                                      ),
-                                    ],
+                                    ),
                                   ),
                                 )
                               ],
                             ),
                           ),
-                          AnimatedOpacity(
-                            duration: const Duration(milliseconds: 500),
-                            opacity: opacity1,
-                            child: Padding(
-                              padding: const EdgeInsets.all(8),
-                              child: Row(
-                                children: <Widget>[
-                                  getTimeBoxUI('24', 'Classe'),
-                                  getTimeBoxUI('2hours', 'Time'),
-                                  getTimeBoxUI('24', 'Seat'),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: AnimatedOpacity(
-                              duration: const Duration(milliseconds: 500),
-                              opacity: opacity2,
-                              child: const Padding(
-                                padding: EdgeInsets.only(
-                                    left: 16, right: 16, top: 8, bottom: 8),
-                                child: Text(
-                                  'Lorem ipsum is simply dummy text of printing & typesetting industry, Lorem ipsum is simply dummy text of printing & typesetting industry.',
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w200,
-                                    fontSize: 14,
-                                    letterSpacing: 0.27,
-                                    color: AppTheme.grey,
-                                  ),
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                            ),
-                          ),
-                          AnimatedOpacity(
-                            duration: const Duration(milliseconds: 500),
-                            opacity: opacity3,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 16, bottom: 16, right: 16),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: <Widget>[
-                                  Container(
-                                    width: 48,
-                                    height: 48,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: AppTheme.nearlyWhite,
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(16.0),
-                                        ),
-                                        border: Border.all(
-                                            color: AppTheme.grey
-                                                .withOpacity(0.2)),
-                                      ),
-                                      child: Icon(
-                                        Icons.add,
-                                        color: AppTheme.nearlyBlue,
-                                        size: 28,
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 16,
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      height: 48,
-                                      decoration: BoxDecoration(
-                                        color: AppTheme.nearlyBlue,
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(16.0),
-                                        ),
-                                        boxShadow: <BoxShadow>[
-                                          BoxShadow(
-                                              color: AppTheme
-                                                  .nearlyBlue
-                                                  .withOpacity(0.5),
-                                              offset: const Offset(1.1, 1.1),
-                                              blurRadius: 10.0),
-                                        ],
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          'Join Course',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 18,
-                                            letterSpacing: 0.0,
-                                            color: AppTheme
-                                                .nearlyWhite,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: MediaQuery.of(context).padding.bottom,
-                          )
-                        ],
-                      ),
+                        ),
+                        SizedBox(
+                          height: MediaQuery.of(context).padding.bottom,
+                        )
+                      ],
                     ),
                   ),
                 ),
               ),
             ),
-            /*Positioned(
-              top: (MediaQuery.of(context).size.width / 1.2) - 24.0 - 35,
-              right: 35,
-              child: ScaleTransition(
-                alignment: Alignment.center,
-                scale: CurvedAnimation(
-                    parent: animationController, curve: Curves.fastOutSlowIn),
-                child: Card(
-                  color: DesignCourseAppTheme.nearlyBlue,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50.0)),
-                  elevation: 10.0,
-                  child: Container(
-                    width: 60,
-                    height: 60,
-                    child: Center(
-                      child: Icon(
-                        Icons.favorite,
-                        color: DesignCourseAppTheme.nearlyWhite,
-                        size: 30,
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),*/
-            Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-              child: SizedBox(
-                width: AppBar().preferredSize.height,
-                height: AppBar().preferredSize.height,
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    borderRadius:
-                        BorderRadius.circular(AppBar().preferredSize.height),
+          ),
+          /*Positioned(
+            top: (MediaQuery.of(context).size.width / 1.2) - 24.0 - 35,
+            right: 35,
+            child: ScaleTransition(
+              alignment: Alignment.center,
+              scale: CurvedAnimation(
+                  parent: animationController, curve: Curves.fastOutSlowIn),
+              child: Card(
+                color: DesignCourseAppTheme.nearlyBlue,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50.0)),
+                elevation: 10.0,
+                child: Container(
+                  width: 60,
+                  height: 60,
+                  child: Center(
                     child: Icon(
-                      Icons.arrow_back_ios,
-                      color: AppTheme.nearlyBlack,
+                      Icons.favorite,
+                      color: DesignCourseAppTheme.nearlyWhite,
+                      size: 30,
                     ),
-                    onTap: () {
-                      Navigator.pop(context);
-                    },
                   ),
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          ),*/
+          Padding(
+            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+            child: SizedBox(
+              width: AppBar().preferredSize.height,
+              height: AppBar().preferredSize.height,
+              child: Material(
+                color: Colors.transparent,
+                child: InkWell(
+                  borderRadius:
+                      BorderRadius.circular(AppBar().preferredSize.height),
+                  child: Icon(
+                    Icons.arrow_back_ios,
+                    color: AppTheme.nearlyBlack,
+                  ),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

@@ -1,18 +1,23 @@
+library home;
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 import 'package:flutter/material.dart';
+import 'package:unhorizons/widgets/widgets.dart';
 
-import '../data_logic/controller/bloc_controller.dart';
-import '../data_logic/values.dart';
-import '../data_logic/values/colors_theme.dart';
 
-import 'user_info_screen.dart';
-import 'menu_wrapable_widget.dart';
-import 'home/course_grid_view.dart';
-import 'home/course_row_view.dart';
+import 'package:unhorizons/logic/values.dart';
+
+import 'package:unhorizons/res.dart';
+import '../widgets/menu_wrapable_widget.dart';
+import '../widgets/course_grid_view.dart';
+import '../widgets/course_row_view.dart';
 
 part 'home/home_screen.dart';
+part 'home/menu_home.dart';
+part 'dashboard.dart';
+part 'user_info_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -44,21 +49,23 @@ class _HomePageState extends State<HomePage> {
           ),
           const AppBarCoolUI(),
           Expanded(
-            child: Container(
-              child: SizedBox(
-                height: MediaQuery
-                    .of(context)
-                    .size
-                    .height,
-                child: Column(
-                  children: const <Widget>[
-                    //getSearchBarUI(),
-                    TabLayerView(),
-                    Flexible(
-                      child: ScreenHome(),
-                    ),
-                  ],
-                ),
+            child: SizedBox(
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height,
+              width: !kIsWeb ? null : MediaQuery
+                  .of(context)
+                  .size
+                  .width*0.9,
+              child: Column(
+                children: const <Widget>[
+                  //getSearchBarUI(),
+                  TabBarView(),
+                  Flexible(
+                    child: ScreenHome(),
+                  ),
+                ],
               ),
             ),
           ),
@@ -86,10 +93,6 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(
-            width: MediaQuery
-                .of(context)
-                .size
-                .width * 0.75,
             height: 64,
             child: Padding(
               padding: const EdgeInsets.only(top: 8, bottom: 8),
@@ -193,6 +196,7 @@ class AppBarCoolUI extends StatelessWidget {
               ],
             ),
           ),
+          if(!kIsWeb)
           SizedBox(
             width: 60,
             height: 60,
@@ -214,254 +218,4 @@ class AppBarCoolUI extends StatelessWidget {
   }
 }
 
-
-
-class ButtonTabBar extends StatelessWidget {
-  const ButtonTabBar({Key? key,
-    required this.categoryTypeData,
-    required this.isSelected
-  }) : super(key: key);
-
-  final CategoryType categoryTypeData;
-  final bool isSelected;
-
-  @override
-  Widget build(BuildContext context) {
-    String txt = '';
-    if (CategoryType.home == categoryTypeData) {
-      txt = 'Home';
-    } else if (CategoryType.course == categoryTypeData) {
-      txt = 'Cours';
-    } else if (CategoryType.planning == categoryTypeData) {
-      txt = 'Horaire ';
-    }
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-            color: isSelected
-                ? Theme.of(context).primaryColor
-                :  AppTheme.nearlyWhite,
-            borderRadius: const BorderRadius.all(Radius.circular(24.0)),
-            border: Border.all(color: Theme.of(context).primaryColor)),
-        child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            splashColor: Colors.white24,
-            borderRadius: const BorderRadius.all(Radius.circular(24.0)),
-            onTap: () {
-              BlocProvider.of<SwitchHomeCubit>(context).change(
-                  categoryTypeData);
-            },
-            child: Padding(
-              padding: const EdgeInsets.only(
-                  top: 12, bottom: 12, left: 18, right: 18),
-              child: Center(
-                child: Text(
-                  txt,
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12,
-                    letterSpacing: 0.27,
-                    color: isSelected
-                        ? AppTheme.nearlyWhite
-                        : Theme.of(context).primaryColor,
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class ScreenHome extends StatefulWidget {
-  const ScreenHome({Key? key}) : super(key: key);
-
-  @override
-  _ScreenHomeState createState() => _ScreenHomeState();
-}
-
-class _ScreenHomeState extends State<ScreenHome> {
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: BlocBuilder<SwitchHomeCubit, CategoryType>(
-        builder: (context, state) {
-          switch (state) {
-            case CategoryType.home:
-              return const MenuContainerHome();
-
-            case CategoryType.course:
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  const CourseRowListView(),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 18, right: 16),
-                    child: Text(
-                      'Mes Cours',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                        letterSpacing: 0.27,
-                        color: AppTheme.darkerText,
-                      ),
-                    ),
-                  ),
-                  Flexible(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 18, right: 16),
-                      child: CourseGridListView(
-                        callBack: () {},
-                      ),
-                    ),
-                  )
-                ],
-              );
-
-            case CategoryType.planning:
-              return Column();
-          }
-        },
-      ),
-    );
-  }
-}
-
-
-class MenuContainerHome extends StatefulWidget {
-  const MenuContainerHome({Key? key}) : super(key: key);
-
-  @override
-  _MenuContainerHomeState createState() => _MenuContainerHomeState();
-}
-
-class _MenuContainerHomeState extends State<MenuContainerHome>
-    with SingleTickerProviderStateMixin {
-  late AnimationController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller =
-    AnimationController(vsync: this, duration: const Duration(seconds: 1))
-      ..forward();
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: ListView(
-        //padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        children: <Widget>[
-          MenuAnimatedContainer(
-            startDelayFraction: 0.00,
-            controller: controller,
-            child: MenuWrapped(
-              menuItem: MenuWrappedItem(
-                iconData: Icons.person_outline,
-                title: 'CORPS ACADEMIQUE',
-                items: [
-                  MenuWrappedItem(
-                    onTap: () => print('++++++++++++++++++++++++++++'),
-                    iconData: Icons.chat,
-                    title: "Organe de l'UNH",
-                    items: [],
-                  ),
-                  MenuWrappedItem(
-                    iconData: Icons.chat,
-                    title: 'Le rectorat',
-                    onTap: () {},
-                    //items: [],
-                  ),
-                  MenuWrappedItem(
-                    iconData: Icons.chat,
-                    title: 'Corps enseignant',
-                    onTap: () {},
-                    //items: [],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 24),
-          MenuAnimatedContainer(
-            startDelayFraction: 0.1,
-            controller: controller,
-            child: MenuWrapped(
-              menuItem: MenuWrappedItem(
-
-                title: 'INFRASTRUCTURE',
-                items: [],
-              ),
-            ),
-          ),
-          const SizedBox(height: 24),
-          MenuAnimatedContainer(
-            startDelayFraction: 0.1,
-            controller: controller,
-            child: MenuWrapped(
-              menuItem: MenuWrappedItem(
-                iconData: Icons.ac_unit,
-                title: "LES ETUDES A L'UNH",
-                items: [
-                  MenuWrappedItem(
-                    title: "Admission",
-                    items: [],
-                  ),
-                  MenuWrappedItem(
-                    title: "Bourse d'etudes",
-                    //items: [],
-                  ),
-                  MenuWrappedItem(
-                    title: "La pedagogie",
-                    //items: [],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 24),
-          MenuAnimatedContainer(
-            startDelayFraction: 0.2,
-            controller: controller,
-            child: MenuWrapped(
-              menuItem: MenuWrappedItem(
-                iconData: Icons.book_outlined,
-                title: 'BIBLIOTHEQUE',
-                items: [
-                  MenuWrappedItem(
-                    title: 'Nos ressources',
-                    items: [],
-                  ),
-                  MenuWrappedItem(
-                    title: "La bibliotheque numerique (e-Library)",
-                    items: [],
-                  ),
-                  MenuWrappedItem(
-                    title: 'Notre carte postale ',
-                    items: [],
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
 

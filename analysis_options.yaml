@@ -25,6 +25,27 @@ linter:
     always_put_required_named_parameters_first: true
     always_require_non_null_named_parameters: true
     always_declare_return_types: true
+
+    always_use_package_imports: true
+
+    avoid_types_as_parameter_names: true
+    avoid_web_libraries_in_flutter: true
+    avoid_empty_else: true
+    avoid_relative_lib_imports: false
+    avoid_init_to_null: true
+    avoid_null_checks_in_equality_operators: true
+    avoid_returning_null: true
+
+
+    no_duplicate_case_values: true
+    use_key_in_widget_constructors: true
+
+    prefer_void_to_null: true
+    #prefer_relative_imports: true
+    prefer_asserts_with_message: true
+    #prefer_double_quotes: true
+    prefer_final_in_for_each: true
+    prefer_is_empty: true
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 

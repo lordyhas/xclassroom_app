@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../data_logic/values/colors_theme.dart';
+import 'package:unhorizons/logic/values.dart';
+
 
 class CourseInfoScreen extends StatefulWidget {
   const CourseInfoScreen({Key? key}) : super(key: key);
@@ -49,7 +50,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
         (MediaQuery.of(context).size.width / 1.2) +
         24.0;
     return Container(
-      color: AppTheme.nearlyWhite,
+      //color: AppTheme.nearlyWhite,
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(

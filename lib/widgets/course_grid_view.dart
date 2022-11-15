@@ -1,8 +1,8 @@
 
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
-import '../../data_logic/values.dart';
+import 'package:unhorizons/logic/values.dart';
+import 'package:utils_component/utils_component.dart';
 
 class CourseGridListView extends StatefulWidget {
   const CourseGridListView({Key? key, this.callBack}) : super(key: key);
@@ -32,46 +32,49 @@ class _CourseGridListViewState extends State<CourseGridListView>
     super.dispose();
   }
 
+  final ScrollController _scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8),
+      padding: const EdgeInsets.only(top: 0),
       child: FutureBuilder<bool>(
         future: getData(),
         builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
           if (!snapshot.hasData) {
             return const SizedBox();
           } else {
-            return GridView(
-              padding: const EdgeInsets.all(8),
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              children: List<Widget>.generate(
-                popularCourseList.length,
-                (int index) {
-                  final int count = popularCourseList.length;
-                  final Animation<double> animation =
-                      Tween<double>(begin: 0.0, end: 1.0).animate(
-                    CurvedAnimation(
-                      parent: animationController,
-                      curve: Interval((1 / count) * index, 1.0,
-                          curve: Curves.fastOutSlowIn),
-                    ),
-                  );
-                  animationController.forward();
-                  return CategoryView(
-                    callback: widget.callBack,
-                    category: popularCourseList[index],
-                    animation: animation,
-                    animationController: animationController,
-                  );
-                },
-              ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 32.0,
-                crossAxisSpacing: 32.0,
-                childAspectRatio: 0.8,
+            return Scrollbar(
+              thumbVisibility: true,
+              controller: _scrollController,
+              child: BooleanBuilder(
+                check: kIsWeb,
+                ifTrue: SingleChildScrollView(
+                  controller: _scrollController,
+                  padding: const EdgeInsets.symmetric(horizontal: 64.0),
+                  child: Wrap(
+                    //runAlignment: WrapAlignment.spaceBetween,
+                    //alignment: WrapAlignment.center,
+                    //spacing: 16.0,
+                    //runSpacing: 32.0,
+                    children: listOfCourseView()..addAll(listOfCourseView()
+                      ..removeAt(0)..reversed),
+                  ),
+                ),
+                ifFalse: GridView(
+                  controller: _scrollController,
+                  padding: const EdgeInsets.all(8),
+                  physics: const BouncingScrollPhysics(),
+                  scrollDirection: Axis.vertical,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: kIsWeb ? 4 : 2,
+                    mainAxisSpacing: 32.0,
+                    crossAxisSpacing: 32.0,
+                    childAspectRatio: kIsWeb ? 0.99 : 0.8,
+                  ),
+                  children: listOfCourseView(),
+
+                ),
               ),
             );
           }
@@ -79,6 +82,42 @@ class _CourseGridListViewState extends State<CourseGridListView>
       ),
     );
   }
+
+  List<Widget> listOfCourseView() => List<Widget>.generate(
+    popularCourseList.length,
+        (int index) {
+      final int count = popularCourseList.length;
+      final Animation<double> animation =
+      Tween<double>(begin: 0.0, end: 1.0).animate(
+        CurvedAnimation(
+          parent: animationController,
+          curve: Interval((1 / count) * index, 1.0,
+              curve: Curves.fastOutSlowIn),
+        ),
+      );
+      animationController.forward();
+      return BooleanBuilder(
+        check: kIsWeb,
+        ifTrue:  Container(
+          margin: const EdgeInsets.all(16.0),
+          height: 250,
+          width: 230,
+          child: CourseGridItemView(
+            callback: widget.callBack,
+            category: popularCourseList[index],
+            animation: animation,
+            animationController: animationController,
+          ),
+        ),
+        ifFalse: CourseGridItemView(
+          callback: widget.callBack,
+          category: popularCourseList[index],
+          animation: animation,
+          animationController: animationController,
+        ),
+      );
+    },
+  );
 
 
   static List<CourseCategory> popularCourseList = <CourseCategory>[
@@ -123,17 +162,52 @@ class _CourseGridListViewState extends State<CourseGridListView>
       lessonCredit: 8,
       //hours: 208,
       rating: 4.9,
-    )
+    ),
+    CourseCategory(
+      imagePath: 'assets/design_course/interFace4.png',
+      title: 'Analyse Numérique',
+      lessonCredit: 2,
+      //hours: 208,
+      rating: 4.9,
+    ),
+
+    CourseCategory(
+      imagePath: 'assets/design_course/interFace4.png',
+      title: 'Structure de donneés',
+      lessonCredit: 2,
+      //hours: 208,
+      rating: 4.9,
+    ),
+    CourseCategory(
+      imagePath: 'assets/design_course/interFace4.png',
+      title: 'Expression Orale et Ecrit',
+      lessonCredit: 8,
+      //hours: 208,
+      rating: 4.9,
+    ),
+    CourseCategory(
+      imagePath: 'assets/design_course/interFace3.png',
+      title: 'Machine Electrique',
+      lessonCredit: 1,
+      //hours: 25,
+      rating: 4.8,
+    ),
+    CourseCategory(
+      imagePath: 'assets/design_course/interFace4.png',
+      title: 'Méchanique Rationnelle',
+      lessonCredit: 2,
+      //hours: 208,
+      rating: 4.9,
+    ),
   ];
 }
 
-class CategoryView extends StatelessWidget {
-  const CategoryView(
-      {Key? key,
+class CourseGridItemView extends StatelessWidget {
+  const CourseGridItemView({
       required this.category,
       required this.animationController,
       required this.animation,
-      this.callback})
+      this.callback, Key? key,})
       : super(key: key);
 
   final VoidCallback? callback;
@@ -141,8 +215,11 @@ class CategoryView extends StatelessWidget {
   final AnimationController animationController;
   final Animation<double> animation;
 
+
+
   @override
   Widget build(BuildContext context) {
+    bool onHover = false;
     return AnimatedBuilder(
       animation: animationController,
       builder: (BuildContext context, Widget? child) {
@@ -154,8 +231,16 @@ class CategoryView extends StatelessWidget {
             child: InkWell(
               splashColor: Colors.transparent,
               onTap: callback,
+              //hoverColor: Colors.transparent,
+              hoverColor: Colors.cyan.withOpacity(0.5),
+              borderRadius: BorderRadius.circular(16.0),
+              onHover:(bool hover){
+                onHover = hover;
+              },
+              mouseCursor: MaterialStateMouseCursor.clickable,
               child: SizedBox(
-                height: 280,
+                //height: 280,
+                //width: 100,
                 child: Stack(
                   alignment: AlignmentDirectional.bottomCenter,
                   children: <Widget>[
@@ -245,7 +330,7 @@ class CategoryView extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(
-                                    width: 48,
+                                    //width: 48,
                                   ),
                                 ],
                               ),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:unhorizons/data_logic/values.dart';
+import 'package:unhorizons/logic/values.dart';
 import 'package:unhorizons/src/home_page.dart';
 
-import 'data_logic/controller/switch_home_bloc/switch_home_cubit.dart';
+import 'logic/controller/switch_home_bloc/switch_home_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,10 +27,9 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'UNH',
+          title: 'horizons-student-space',
           theme: AppTheme.themeLight,
-          home:
-              const HomePage() //const MyHomePage(title: 'Flutter Demo Home Page'),
+          home: const Dashboard() //const MyHomePage(title: 'Flutter Demo Home Page'),
           ),
     );
   }

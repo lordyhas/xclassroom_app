@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:utils_component/utils_component.dart';
 
-import '../data_logic/values/colors_theme.dart';
-
-
 class MenuAnimatedContainer extends StatefulWidget {
   MenuAnimatedContainer({
-    Key? key,
     required double startDelayFraction,
     required this.controller,
     required this.child,
+    Key? key,
   })  : topPaddingAnimation = Tween(
           begin: 60.0,
           end: 0.0,

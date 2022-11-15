@@ -1,5 +1,6 @@
 library values;
-export 'package:unhorizons/data_logic/models/course_category.dart';
+export 'package:unhorizons/logic/models/course_category.dart';
+export 'package:unhorizons/logic/controller/bloc_controller.dart';
 export 'values/colors_theme.dart';
 import 'dart:ui';
 
@@ -15,3 +16,4 @@ class HexColor extends Color {
     return int.parse(hexColor, radix: 16);
   }
 }
+

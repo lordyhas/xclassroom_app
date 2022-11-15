@@ -1,7 +1,8 @@
+import 'package:flutter/foundation.dart';
+import 'package:unhorizons/logic/values.dart';
 import 'package:unhorizons/main.dart';
 import 'package:flutter/material.dart';
 
-import '../../data_logic/values.dart';
 
 class CourseRowListView extends StatefulWidget {
   const CourseRowListView({Key? key,}) : super(key: key);
@@ -63,7 +64,7 @@ class _CourseRowListViewState extends State<CourseRowListView>
                                   curve: Curves.fastOutSlowIn)));
                   animationController.forward();
 
-                  return CategoryView(
+                  return CourseListItemView(
                     category: categoryList[index],
                     animation: animation,
                     animationController: animationController,
@@ -112,13 +113,12 @@ class _CourseRowListViewState extends State<CourseRowListView>
   ];
 }
 
-class CategoryView extends StatelessWidget {
-  const CategoryView(
-      {Key? key,
+class CourseListItemView extends StatelessWidget {
+  const CourseListItemView({
       required this.category,
       required this.animationController,
       required this.animation,
-      this.callback})
+      this.callback, Key? key,})
       : super(key: key);
 
   final VoidCallback? callback;
@@ -137,12 +137,14 @@ class CategoryView extends StatelessWidget {
             transform: Matrix4.translationValues(
                 100 * (1.0 - animation.value), 0.0, 0.0),
             child: InkWell(
+              hoverColor: Colors.green.shade200.withOpacity(0.3),
+              borderRadius: BorderRadius.circular(16.0),
               splashColor: Colors.transparent,
               onTap: () {
                 callback!();
               },
               child: SizedBox(
-                width: 280,
+                width: kIsWeb? 320 : 280,
                 child: Stack(
                   children: <Widget>[
                     Container(
@@ -161,7 +163,7 @@ class CategoryView extends StatelessWidget {
                               child: Row(
                                 children: <Widget>[
                                   const SizedBox(
-                                    width: 48 + 24.0,
+                                    width:  48 + 24.0,
                                   ),
                                   Expanded(
                                     child: Container(
@@ -173,12 +175,14 @@ class CategoryView extends StatelessWidget {
                                             child: Text(
                                               category.title,
                                               textAlign: TextAlign.left,
+                                              overflow: TextOverflow.ellipsis,
                                               style: const TextStyle(
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 16,
                                                 letterSpacing: 0.27,
                                                 color: AppTheme
                                                     .darkerText,
+
                                               ),
                                             ),
                                           ),
