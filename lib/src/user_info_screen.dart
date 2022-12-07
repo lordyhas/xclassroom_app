@@ -168,26 +168,24 @@ class _OldUserInfoScreenState extends State<UserInfoScreen>
                                   color: AppTheme.nearlyBlue,
                                 ),
                               ),
-                              Container(
-                                child: Row(
-                                  children: const <Widget>[
-                                    Text(
-                                      '4.3',
-                                      textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w200,
-                                        fontSize: 22,
-                                        letterSpacing: 0.27,
-                                        color: AppTheme.grey,
-                                      ),
+                              Row(
+                                children: const <Widget>[
+                                  Text(
+                                    '4.3',
+                                    textAlign: TextAlign.left,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w200,
+                                      fontSize: 22,
+                                      letterSpacing: 0.27,
+                                      color: AppTheme.grey,
                                     ),
-                                    Icon(
-                                      Icons.star,
-                                      color: AppTheme.nearlyBlue,
-                                      size: 24,
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                  Icon(
+                                    Icons.star,
+                                    color: AppTheme.nearlyBlue,
+                                    size: 24,
+                                  ),
+                                ],
                               )
                             ],
                           ),
@@ -238,7 +236,7 @@ class _OldUserInfoScreenState extends State<UserInfoScreen>
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: <Widget>[
-                                Container(
+                                SizedBox(
                                   width: 48,
                                   height: 48,
                                   child: Container(
@@ -251,7 +249,7 @@ class _OldUserInfoScreenState extends State<UserInfoScreen>
                                           color: AppTheme.grey
                                               .withOpacity(0.2)),
                                     ),
-                                    child: Icon(
+                                    child: const Icon(
                                       Icons.add,
                                       color: AppTheme.nearlyBlue,
                                       size: 28,
@@ -278,7 +276,7 @@ class _OldUserInfoScreenState extends State<UserInfoScreen>
                                             blurRadius: 10.0),
                                       ],
                                     ),
-                                    child: Center(
+                                    child: const Center(
                                       child: Text(
                                         'Join Course',
                                         textAlign: TextAlign.left,
@@ -343,7 +341,7 @@ class _OldUserInfoScreenState extends State<UserInfoScreen>
                 child: InkWell(
                   borderRadius:
                       BorderRadius.circular(AppBar().preferredSize.height),
-                  child: Icon(
+                  child: const Icon(
                     Icons.arrow_back_ios,
                     color: AppTheme.nearlyBlack,
                   ),
@@ -383,7 +381,7 @@ class _OldUserInfoScreenState extends State<UserInfoScreen>
               Text(
                 text1,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.w600,
                   fontSize: 14,
                   letterSpacing: 0.27,
@@ -393,7 +391,7 @@ class _OldUserInfoScreenState extends State<UserInfoScreen>
               Text(
                 txt2,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.w200,
                   fontSize: 14,
                   letterSpacing: 0.27,

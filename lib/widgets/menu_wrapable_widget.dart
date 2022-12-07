@@ -59,13 +59,12 @@ class MenuWrapped extends StatefulWidget {
   final double expandedRadius;
   final Size size;
 
-  const MenuWrapped(
-      {Key? key,
+  const MenuWrapped({
       required this.menuItem,
       this.radius = 16,
       this.expandedRadius = 8,
-      this.size = Size.zero})
-      : super(key: key);
+      this.size = Size.zero, Key? key,
+  }) : super(key: key);
 
   @override
   _MenuWrappedState createState() => _MenuWrappedState();
@@ -132,16 +131,16 @@ class _MenuWrappedState extends State<MenuWrapped>
                             // widget.categoryBean.icon,
                             child: Icon(
                               widget.menuItem.iconData,
-                              size: 32,
+                              //size: 32,
                             ),
                           ),
-                          const SizedBox(width: 8),
+                          const SizedBox(width: 4.0),
                           Expanded(
                             child: Text(
                               widget.menuItem.title,
                               style: const TextStyle(
                                   color: Colors.black,
-                                  fontSize: 24,
+                                  //fontSize: 24,
                                   fontWeight: FontWeight.bold
                               ),
                               overflow: TextOverflow.ellipsis,
@@ -202,7 +201,9 @@ class MenuWrappedItemWidget extends StatelessWidget {
       onTap: categoryBeanItem.onTap,
       title: Text(
         categoryBeanItem.title,
-        style: const TextStyle(color: Colors.black, fontSize: 22),
+        style: const TextStyle(
+            color: Colors.black, //fontSize: 22
+        ),
       ),
     );
   }
@@ -214,5 +215,6 @@ class MenuWrappedItem {
   List<MenuWrappedItem>? items;
   VoidCallback? onTap;
 
-  MenuWrappedItem({this.iconData, required this.title, this.items, this.onTap});
+  MenuWrappedItem({ required this.title, this.iconData, this.items, this.onTap});
+
 }

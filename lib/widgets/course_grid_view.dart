@@ -49,16 +49,20 @@ class _CourseGridListViewState extends State<CourseGridListView>
               controller: _scrollController,
               child: BooleanBuilder(
                 check: kIsWeb,
-                ifTrue: SingleChildScrollView(
-                  controller: _scrollController,
-                  padding: const EdgeInsets.symmetric(horizontal: 64.0),
-                  child: Wrap(
-                    //runAlignment: WrapAlignment.spaceBetween,
-                    //alignment: WrapAlignment.center,
-                    //spacing: 16.0,
-                    //runSpacing: 32.0,
-                    children: listOfCourseView()..addAll(listOfCourseView()
-                      ..removeAt(0)..reversed),
+                ifTrue: Container(
+                  width: double.infinity,
+                  color: Colors.transparent,
+                  child: SingleChildScrollView(
+                    controller: _scrollController,
+                    padding: const EdgeInsets.symmetric(horizontal: 64.0),
+                    child: Wrap(
+                      //runAlignment: WrapAlignment.spaceBetween,
+                      //alignment: WrapAlignment.center,
+                      //spacing: 16.0,
+                      //runSpacing: 32.0,
+                      children: listOfCourseView()..addAll(listOfCourseView()
+                        ..removeAt(0)..reversed),
+                    ),
                   ),
                 ),
                 ifFalse: GridView(

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unhorizons/logic/values.dart';
-import 'package:unhorizons/src/home_page.dart';
+import 'package:unhorizons/src/dashboard.dart';
 
-import 'logic/controller/switch_home_bloc/switch_home_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,9 +24,11 @@ class MyApp extends StatelessWidget {
           create: (BuildContext context) => SwitchHomeCubit(),
         ),
       ],
+      // horizons-student-space : hostspace HOST SPACE
+      // espace etudiant horizons : eeh - ESPETUHOR
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          title: 'horizons-student-space',
+          title: 'horizons-student-space ',
           theme: AppTheme.themeLight,
           home: const Dashboard() //const MyHomePage(title: 'Flutter Demo Home Page'),
           ),

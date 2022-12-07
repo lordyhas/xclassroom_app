@@ -16,7 +16,6 @@ import '../widgets/course_row_view.dart';
 
 part 'home/home_screen.dart';
 part 'home/menu_home.dart';
-part 'dashboard.dart';
 part 'user_info_screen.dart';
 
 class HomePage extends StatefulWidget {
@@ -174,7 +173,7 @@ class AppBarCoolUI extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: const <Widget>[
                 Text(
-                  'Université',
+                  "University", //'Université',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.w400,
@@ -184,7 +183,7 @@ class AppBarCoolUI extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'Nouveaux Horizons',
+                  "XXXXX XXXXX",//'Nouveaux Horizons',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
