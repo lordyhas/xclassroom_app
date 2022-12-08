@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:unhorizons/logic/values/dimens.dart';
 import 'package:unhorizons/widgets/widgets.dart';
 
 
@@ -22,7 +24,7 @@ class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -40,30 +42,17 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: AppTheme.nearlyWhite,
       body: Column(
         children: <Widget>[
-          SizedBox(
-            height: MediaQuery
-                .of(context)
-                .padding
-                .top,
-          ),
+          SizedBox(height: MediaQuery.of(context).padding.top,),
           const AppBarCoolUI(),
           Expanded(
             child: SizedBox(
-              height: MediaQuery
-                  .of(context)
-                  .size
-                  .height,
-              width: !kIsWeb ? null : MediaQuery
-                  .of(context)
-                  .size
-                  .width*0.9,
+              height: MediaQuery.of(context).size.height,
+              width: kIsWeb ? MediaQuery.of(context).size.width * 0.9 : null,
               child: Column(
                 children: const <Widget>[
                   //getSearchBarUI(),
                   TabBarView(),
-                  Flexible(
-                    child: ScreenHome(),
-                  ),
+                  Flexible(child: ScreenHome()),
                 ],
               ),
             ),

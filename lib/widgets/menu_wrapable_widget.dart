@@ -61,8 +61,8 @@ class MenuWrapped extends StatefulWidget {
 
   const MenuWrapped({
       required this.menuItem,
-      this.radius = 16,
-      this.expandedRadius = 8,
+      this.radius = 20,
+      this.expandedRadius = 16,
       this.size = Size.zero, Key? key,
   }) : super(key: key);
 
@@ -127,14 +127,14 @@ class _MenuWrappedState extends State<MenuWrapped>
                       child: Row(
                         children: <Widget>[
                           Container(
-                            margin: const EdgeInsets.symmetric(horizontal: 24),
+                            margin: const EdgeInsets.symmetric(horizontal: 16.0),
                             // widget.categoryBean.icon,
                             child: Icon(
                               widget.menuItem.iconData,
                               //size: 32,
                             ),
                           ),
-                          const SizedBox(width: 4.0),
+                          //const SizedBox(width: 2.0),
                           Expanded(
                             child: Text(
                               widget.menuItem.title,
@@ -163,7 +163,7 @@ class _MenuWrappedState extends State<MenuWrapped>
           );
         },
         child: BooleanBuilder(
-          check: isExpanded || controller.isDismissed,
+          condition: () => isExpanded || controller.isDismissed,
           ifTrue: Column(
               children: widget.menuItem.items!
                   .map((item) => MenuWrappedItemWidget(item))

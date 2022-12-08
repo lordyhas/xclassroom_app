@@ -1,6 +1,7 @@
 library dashboard;
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:unhorizons/logic/values.dart';
 import 'package:unhorizons/src/home_page.dart';
 import 'package:unhorizons/widgets/widgets.dart';

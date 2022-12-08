@@ -63,7 +63,7 @@ packages:
       name: cupertino_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.4"
+    version: "1.0.5"
   fake_async:
     dependency: transitive
     description:
@@ -139,7 +139,7 @@ packages:
       name: font_awesome_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "10.1.0"
+    version: "10.3.0"
   fuchsia_remote_debug_protocol:
     dependency: transitive
     description: flutter
@@ -233,7 +233,7 @@ packages:
       name: path_provider_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.20"
+    version: "2.0.22"
   path_provider_ios:
     dependency: transitive
     description:
@@ -296,7 +296,7 @@ packages:
       name: provider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.0.2"
+    version: "6.0.4"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -379,7 +379,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "5c3522b19ebd2a09222525b1d564af0193871daa"
+      resolved-ref: "4c6d8ce81751c48484bd4264b573d0363478ee27"
       url: "https://github.com/lordyhas/utils_component"
     source: git
     version: "0.0.1"
@@ -389,7 +389,7 @@ packages:
       name: uuid
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.6"
+    version: "3.0.7"
   vector_math:
     dependency: transitive
     description:

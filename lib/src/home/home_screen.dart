@@ -18,13 +18,12 @@ class _ScreenHomeState extends State<ScreenHome> {
           switch (state) {
             case CategoryType.home:
               return const MenuContainerHome();
-
             case CategoryType.course:
               return Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                //mainAxisAlignment: MainAxisAlignment.center,
+                //crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  const CourseRowListView(),
+                  //const CourseRowListView(),
                   const Padding(
                     padding: EdgeInsets.only(left: 18, right: 16),
                     child: Text(
@@ -38,15 +37,14 @@ class _ScreenHomeState extends State<ScreenHome> {
                       ),
                     ),
                   ),
-
                   Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 18, right: 16),
+                    child: Container(
+                      //padding: const EdgeInsets.only(left: 18, right: 16),
                       child: CourseGridListView(
                         callBack: () {},
                       ),
                     ),
-                  )
+                  ),
                 ],
               );
 
@@ -74,9 +72,7 @@ class TabBarView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          const SizedBox(
-            height: 4,
-          ),
+          const SizedBox(height: 4),
           BlocBuilder<SwitchHomeCubit, CategoryType>(
             builder: (context, state) {
               return Padding(
@@ -85,17 +81,15 @@ class TabBarView extends StatelessWidget {
                   children: <Widget>[
                     TabBarButton(
                       title: "Home",
-                        onTap: () => BlocProvider
-                            .of<SwitchHomeCubit>(context)
+                        onTap: () => BlocProvider.of<SwitchHomeCubit>(context)
                             .change(CategoryType.home),
                         isSelected: state == CategoryType.home),
                     const SizedBox(width: 16),
 
                     TabBarButton(
                         title: "Cours",
-                        onTap: () => BlocProvider
-                            .of<SwitchHomeCubit>(context)
-                            .change(CategoryType.course),
+                        onTap: () => BlocProvider.of<SwitchHomeCubit>(context)
+                              .change(CategoryType.course),
                         isSelected: state == CategoryType.course),
                     const SizedBox(width: 16),
                     TabBarButton(
@@ -109,9 +103,7 @@ class TabBarView extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(
-            height: 4,
-          ),
+          const SizedBox(height: 4,),
 
         ],
       ),

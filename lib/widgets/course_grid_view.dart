@@ -2,12 +2,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:unhorizons/logic/values.dart';
-import 'package:utils_component/utils_component.dart';
+//import 'package:utils_component/utils_component.dart' hide Responsive;
 
 class CourseGridListView extends StatefulWidget {
   const CourseGridListView({Key? key, this.callBack}) : super(key: key);
 
-  final VoidCallback? callBack;
+  final Function()? callBack;
   @override
   _CourseGridListViewState createState() => _CourseGridListViewState();
 }
@@ -48,7 +48,7 @@ class _CourseGridListViewState extends State<CourseGridListView>
               thumbVisibility: true,
               controller: _scrollController,
               child: BooleanBuilder(
-                check: kIsWeb,
+                condition: () => !Responsive.of(context).isPhone,
                 ifTrue: Container(
                   width: double.infinity,
                   color: Colors.transparent,
@@ -60,7 +60,8 @@ class _CourseGridListViewState extends State<CourseGridListView>
                       //alignment: WrapAlignment.center,
                       //spacing: 16.0,
                       //runSpacing: 32.0,
-                      children: listOfCourseView()..addAll(listOfCourseView()
+                      children: listOfCourseView()
+                        ..addAll(listOfCourseView()
                         ..removeAt(0)..reversed),
                     ),
                   ),
@@ -71,10 +72,10 @@ class _CourseGridListViewState extends State<CourseGridListView>
                   physics: const BouncingScrollPhysics(),
                   scrollDirection: Axis.vertical,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: kIsWeb ? 4 : 2,
+                    crossAxisCount: 2,
                     mainAxisSpacing: 32.0,
                     crossAxisSpacing: 32.0,
-                    childAspectRatio: kIsWeb ? 0.99 : 0.8,
+                    childAspectRatio:  0.8,
                   ),
                   children: listOfCourseView(),
 
@@ -101,7 +102,7 @@ class _CourseGridListViewState extends State<CourseGridListView>
       );
       animationController.forward();
       return BooleanBuilder(
-        check: kIsWeb,
+        condition: () => !Responsive.of(context).isPhone,
         ifTrue:  Container(
           margin: const EdgeInsets.all(16.0),
           height: 250,

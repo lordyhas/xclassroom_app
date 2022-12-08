@@ -8,20 +8,20 @@ class SideDrawer extends StatefulWidget {
 }
 
 class _SideDrawerState extends State<SideDrawer> with TickerProviderStateMixin{
-  late AnimationController controller;
+  //late AnimationController controller;
 
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
+    /*controller = AnimationController(
         vsync: this,
         duration: const Duration(seconds: 1)
-    )..forward();
+    )..forward();*/
   }
 
   @override
   void dispose() {
-    controller.dispose();
+    //controller.dispose();
     super.dispose();
   }
 
@@ -46,124 +46,28 @@ class _SideDrawerState extends State<SideDrawer> with TickerProviderStateMixin{
                     color: Colors.deepOrange,
                     borderRadius: BorderRadius.circular(100.0),
                   ),
-                  child:  const Icon(Icons.ac_unit_sharp),
+                  child:  const Icon(FontAwesomeIcons.graduationCap),
                 ),
                 const SizedBox(width: 8.0,),
                 const Text("unhorizons.org"),
-
-
-
               ],
             ),
           ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                  children: [
-                    MenuAnimatedContainer(
-                      startDelayFraction: 0.00,
-                      controller: controller,
-                      child: MenuWrapped(
-                        menuItem: MenuWrappedItem(
-                          //iconData: Icons.co_present,
-                          title: 'CORPS ACADEMIQUE',
-                          items: [
-                            MenuWrappedItem(
-                              onTap: () => debugPrint('++++++++++++++++++++++++++++'),
-                              //iconData: Icons.chat,
-                              title: "Organe de l'UNH",
-                              items: [],
-                            ),
-                            MenuWrappedItem(
-                              //iconData: Icons.chat,
-                              title: 'Le rectorat',
-                              onTap: () {},
-                              //items: [],
-                            ),
-                            MenuWrappedItem(
-                              //iconData: Icons.chat,
-                              title: 'Corps enseignant',
-                              onTap: () {},
-                              //items: [],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    MenuAnimatedContainer(
-                      startDelayFraction: 0.1,
-                      controller: controller,
-                      child: MenuWrapped(
-                        menuItem: MenuWrappedItem(
-                          iconData: Icons.account_balance_outlined,
-                          title: 'INFRASTRUCTURE',
-                          items: [],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    MenuAnimatedContainer(
-                      startDelayFraction: 0.1,
-                      controller: controller,
-                      child: MenuWrapped(
-                        menuItem: MenuWrappedItem(
-                          iconData: Icons.school,
-                          title: "LES ETUDES A L'UNH",
-                          items: [
-                            MenuWrappedItem(
-                              title: "Admission",
-                              items: [],
-                            ),
-                            MenuWrappedItem(
-                              title: "Bourse d'etudes",
-                              //items: [],
-                            ),
-                            MenuWrappedItem(
-                              title: "La pedagogie",
-                              //items: [],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    MenuAnimatedContainer(
-                      startDelayFraction: 0.2,
-                      controller: controller,
-                      child: MenuWrapped(
-                        menuItem: MenuWrappedItem(
-                          iconData: Icons.book_outlined,
-                          title: 'BIBLIOTHEQUE',
-                          items: [
-                            MenuWrappedItem(
-                              title: 'Nos ressources',
-                              items: [],
-                            ),
-                            MenuWrappedItem(
-                              title: "La bibliotheque numerique (e-Library)",
-                              items: [],
-                            ),
-                            MenuWrappedItem(
-                              title: 'Notre carte postale ',
-                              items: [],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+          const Expanded(
+              child: SizedBox(
 
-
-                  ]
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 8.0),//symmetric(horizontal: 8.0),
+                    child: ItemScreenView(),
+                  ),
               ),
-            ),
           ),
           const Divider(),
           Column(
             children: [
               ListTile(
                 leading: const Icon(Icons.settings),
-                title: Text("Setting"),
+                title: const Text("Setting"),
                 onTap: (){},
               ),
               ListTile(

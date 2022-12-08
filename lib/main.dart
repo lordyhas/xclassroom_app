@@ -1,7 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:unhorizons/logic/values.dart';
 import 'package:unhorizons/src/dashboard.dart';
+import 'package:unhorizons/src/home_page.dart';
 
 
 void main() {
@@ -30,8 +32,25 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'horizons-student-space ',
           theme: AppTheme.themeLight,
-          home: const Dashboard() //const MyHomePage(title: 'Flutter Demo Home Page'),
+          home: const RootApp() //const MyHomePage(title: 'Flutter Demo Home Page'),
           ),
     );
   }
 }
+
+class RootApp extends StatelessWidget {
+  const RootApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (kDebugMode) {
+      print("${Responsive.of(context).size} =========================");
+    }
+    return BooleanBuilder(
+      condition: () => Responsive.of(context).isPhone,
+      ifTrue: const HomePage(),
+      ifFalse: const Dashboard(),
+    );
+  }
+}
+

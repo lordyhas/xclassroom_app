@@ -13,7 +13,7 @@ class TabBarButton extends StatelessWidget {
     Key? key,
   }) :  super(key: key);
 
-  final Function onTap;
+  final VoidCallback onTap;
   final bool isSelected;
   final String title;
 
@@ -33,7 +33,7 @@ class TabBarButton extends StatelessWidget {
           child: InkWell(
             splashColor: Colors.white24,
             borderRadius: const BorderRadius.all(Radius.circular(24.0)),
-            onTap: () => onTap,
+            onTap: onTap,
             child: Padding(
               padding: const EdgeInsets.only(
                   top: 12, bottom: 12, left: 18, right: 18),
