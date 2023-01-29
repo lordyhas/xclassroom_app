@@ -53,13 +53,55 @@ class _SideDrawerState extends State<SideDrawer> with TickerProviderStateMixin{
               ],
             ),
           ),
-          const Expanded(
-              child: SizedBox(
+           Expanded(
+              child: SingleChildScrollView(
+                child: SizedBox(
 
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 8.0),//symmetric(horizontal: 8.0),
-                    child: ItemScreenView(),
-                  ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 8.0),//symmetric(horizontal: 8.0),
+                      child: //ItemScreenView(),
+                      Column(
+                        children: const [
+                          ExpansionTile(
+                            title: Text("Admision"),
+                            children: [
+                              ListTile(
+                                title: Text("Lorem ipsum"),
+                              ),
+                            ],
+                          ),
+                          ExpansionTile(
+                            title: Text("Mes Etudes"),
+                            children: [
+                              ListTile(
+                                title: Text("Mes Horaires"),
+                              ),
+                              ListTile(
+                                title: Text("Mes Cours"),
+                              ),
+                              ListTile(
+                                title: Text("Cours déjà fait"),
+                              ),
+                              ListTile(
+                                title: Text("Calandrier academique"),
+                              ),
+                            ],
+                          ),
+                          ExpansionTile(
+                            title: Text("Documents"),
+                            children: [
+                              ListTile(
+                                title: Text("Attestation"),
+                              ),
+                              ListTile(
+                                title: Text("Relevé de notes"),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                ),
               ),
           ),
           const Divider(),
@@ -88,5 +130,23 @@ class _SideDrawerState extends State<SideDrawer> with TickerProviderStateMixin{
     );
   }
 }
+
+class DrawerView extends StatelessWidget {
+  const DrawerView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Column(
+        children: [
+          ListTile(
+            title: Text(""),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 
 

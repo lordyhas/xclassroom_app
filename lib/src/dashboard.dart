@@ -24,6 +24,14 @@ class _DashboardState extends State<Dashboard> {
     final double tempHeight = MediaQuery.of(context).size.height -
         (MediaQuery.of(context).size.width / 1.2) + 24.0;
     return Scaffold(
+      drawer: Drawer(
+        child: Column(
+          children:  const [
+            DrawerHeader(child: SizedBox(),),
+
+          ],
+        ),
+      ),
       body:  SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
@@ -62,11 +70,8 @@ class _DashboardState extends State<Dashboard> {
                       ),
 
                       Expanded(
-                        child: Container(
-                          //padding: const EdgeInsets.only(left: 18, right: 16),
-                          child: CourseGridListView(
-                            callBack: () {},
-                          ),
+                        child: CourseGridListView(
+                          callBack: () {},
                         ),
                       )
                     ],

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "143621298817",
+    "project_id": "studentbigspace",
+    "storage_bucket": "studentbigspace.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:143621298817:android:1cfa56da2cef2203b14b80",
+        "android_client_info": {
+          "package_name": "com.lordyhas.unhorizons.unhorizons"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "143621298817-g8bf0901dp04kfrbqqf51isqhacsta6c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA17UOhA7xOWGn0I5Xb29AAf14XYn5cjEw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "143621298817-g8bf0901dp04kfrbqqf51isqhacsta6c.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "143621298817-1n2847ju0mcltv82369rinrasa9796sp.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.lordyhas.unhorizons.unhorizons"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
