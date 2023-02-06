@@ -173,9 +173,9 @@ class CacheClient {
 /// Repository which manages user authentication_bloc.
 /// {@endtemplate}
 ///
-class AuthenticationRepository {
+class AuthRepository {
   /// {@macro authentication_repository}
-   AuthenticationRepository({
+   AuthRepository({
     CacheClient? cache,
     firebase_auth.FirebaseAuth? firebaseAuth,
     GoogleSignIn? googleSignIn,
