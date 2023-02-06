@@ -1,6 +1,6 @@
-part of home;
+part of dashboard;
 
-
+/*
 class UserInfoScreen extends StatefulWidget {
   const UserInfoScreen({Key? key}) : super(key: key);
 
@@ -18,7 +18,9 @@ class _UserInfoScreenState extends State<UserInfoScreen>{
     );
   }
 }
+*/
 
+/*
 class _OldUserInfoScreenState extends State<UserInfoScreen>
     with TickerProviderStateMixin {
   final double infoHeight = 364.0;
@@ -405,3 +407,6 @@ class _OldUserInfoScreenState extends State<UserInfoScreen>
     );
   }
 }
+
+
+*/

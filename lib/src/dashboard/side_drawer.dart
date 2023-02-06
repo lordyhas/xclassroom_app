@@ -27,6 +27,7 @@ class _SideDrawerState extends State<SideDrawer> with TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
     return Container(
       color: Colors.grey.withOpacity(0.1),
       padding: const EdgeInsets.only(right: 16),
@@ -53,77 +54,22 @@ class _SideDrawerState extends State<SideDrawer> with TickerProviderStateMixin{
               ],
             ),
           ),
-           Expanded(
+           const Expanded(
               child: SingleChildScrollView(
                 child: SizedBox(
 
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 8.0),//symmetric(horizontal: 8.0),
-                      child: //ItemScreenView(),
-                      Column(
-                        children: const [
-                          ExpansionTile(
-                            title: Text("Admision"),
-                            children: [
-                              ListTile(
-                                title: Text("Lorem ipsum"),
-                              ),
-                            ],
-                          ),
-                          ExpansionTile(
-                            title: Text("Mes Etudes"),
-                            children: [
-                              ListTile(
-                                title: Text("Mes Horaires"),
-                              ),
-                              ListTile(
-                                title: Text("Mes Cours"),
-                              ),
-                              ListTile(
-                                title: Text("Cours déjà fait"),
-                              ),
-                              ListTile(
-                                title: Text("Calandrier academique"),
-                              ),
-                            ],
-                          ),
-                          ExpansionTile(
-                            title: Text("Documents"),
-                            children: [
-                              ListTile(
-                                title: Text("Attestation"),
-                              ),
-                              ListTile(
-                                title: Text("Relevé de notes"),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                      padding: EdgeInsets.only(),//symmetric(horizontal: 8.0),
+                      child:DrawerContent(), //ItemScreenView(),
+
                     ),
                 ),
               ),
           ),
           const Divider(),
-          Column(
-            children: [
-              ListTile(
-                leading: const Icon(Icons.settings),
-                title: const Text("Setting"),
-                onTap: (){},
-              ),
-              ListTile(
-                leading: const Icon(Icons.mail),
-                title: const Text("Inbox"),
-                onTap: (){},
-              ),
-
-              ListTile(
-                leading: const Icon(Icons.info_outline),
-                title: const Text("About"),
-                onTap: (){},
-              ),
-            ],
+          DrawerFooter(
+            showProfileItem: !(width > maxUserSideAppear),
+            showPlanningItem: true,
           ),
         ],
       ),
@@ -131,16 +77,146 @@ class _SideDrawerState extends State<SideDrawer> with TickerProviderStateMixin{
   }
 }
 
-class DrawerView extends StatelessWidget {
-  const DrawerView({Key? key}) : super(key: key);
+class DrawerFooter extends StatelessWidget {
+  final bool showProfileItem;
+  final bool showPlanningItem;
+  const DrawerFooter({
+    Key? key,
+    this.showProfileItem = false,
+    this.showPlanningItem = false,
+  }) : super(key: key);
+
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Column(
+      children: [
+        if(showProfileItem)
+        ListTile(
+          leading: const Icon(Icons.person),
+          title: const Text("Mon Profile"),
+          onTap: () {
+            GoRouter.of(context).goNamed(UserInfoScreen.routeName);
+            BlocProvider.of<NavigationController>(context).setProfileOpen();
+          }
+        ),
+        if(showPlanningItem)
+        ListTile(
+          leading: const Icon(Icons.schedule_outlined),
+          title: const Text("Horaire de la semaine"),
+          onTap: () => BlocProvider
+              .of<NavigationController>(context)
+              .change(NavigationScreen.planning),
+        ),
+
+        ListTile(
+          leading: const Icon(Icons.settings),
+          title: const Text("Paramètres"),
+          onTap: (){},
+        ),
+        ListTile(
+          leading: const Icon(Icons.mail),
+          title: const Text("Inbox"),
+          onTap: (){},
+        ),
+        ListTile(
+          leading: const Icon(Icons.info_outline),
+          title: const Text("À propos"),
+          onTap: (){},
+        ),
+      ],
+    );
+  }
+}
+
+
+class DrawerContent extends StatelessWidget {
+  const DrawerContent({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
       child: Column(
-        children: [
-          ListTile(
-            title: Text(""),
+        children:  [
+          ExpansionTile(
+            title: const Text("Admision"),
+            children: [
+              ListTile(
+                title: const Text("Futur étudiant"),
+                onTap: (){},
+              ),
+              ListTile(
+                title: const Text("Mon Admission"),
+                onTap: (){},
+              ),
+            ],
+          ),
+          ExpansionTile(
+            title: const Text("Mes Études"),
+            children: [
+              ListTile(
+                title: const Text("Mes Horaires"),
+                onTap: () {},
+              ),          ListTile(
+                title: const Text("Mes Cours"),
+                onTap: (){},
+              ),
+              ListTile(
+                title: const Text("Cours déjà fait"),
+                onTap: (){},
+              ),
+              ListTile(
+                title: const Text("Calandrier academique"),
+                onTap: (){},
+              ),
+            ],
+          ),
+          ExpansionTile(
+            title: const Text("Documents Officiels"),
+            children: [
+
+              ExpansionTile(
+                title: const Text("Attestations"),
+                children: [
+                  ListTile(
+                    title: const Text("de Fréquentation"),
+                    onTap: (){},
+                  ),
+                  ListTile(
+                    title: const Text("de Réussite"),
+                    onTap: (){},
+                  ),ListTile(
+                    title: const Text("de Recherche"),
+                    onTap: (){},
+                  ),ListTile(
+                    title: const Text("de Stage"),
+                    onTap: (){},
+                  ),
+                ],
+              ),
+
+              ListTile(
+                title: const Text("Lettre de demande des stage"),
+                onTap: (){},
+              ),
+              ListTile(
+                title: const Text("Relevé de notes"),
+                onTap: (){},
+              ),
+            ],
+          ),
+          ExpansionTile(
+            title: const Text("Mon Results"),
+            children: [
+              ListTile(
+                title: const Text("Mes Moyennes"),
+                onTap: (){},
+              ),
+              ListTile(
+                title: const Text("Introduire un recours"),
+                onTap: (){},
+              ),
+            ],
           ),
         ],
       ),

@@ -1,14 +1,29 @@
 part of dashboard;
 
-
-class SideUserInfoScreen extends StatefulWidget {
+class SideUserInfoScreen extends StatelessWidget {
   const SideUserInfoScreen({Key? key}) : super(key: key);
 
   @override
-  State<SideUserInfoScreen> createState() => _SideUserInfoScreenState();
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(left: 16, right: 8.0),
+      width: 350,
+      child: const UserInfoScreen(),
+    );
+  }
 }
 
-class _SideUserInfoScreenState extends State<SideUserInfoScreen> {
+
+class UserInfoScreen extends StatefulWidget {
+  static const routeName = "user-profile";
+  //static const routeUrl = "/admission/introduction";
+  const UserInfoScreen({Key? key}) : super(key: key);
+
+  @override
+  State<UserInfoScreen> createState() => _UserInfoScreenState();
+}
+
+class _UserInfoScreenState extends State<UserInfoScreen> {
 
   int percent = 70;
 
@@ -59,6 +74,9 @@ class _SideUserInfoScreenState extends State<SideUserInfoScreen> {
             ),
           ),
           Container(
+            constraints: const BoxConstraints(
+              maxWidth: kMediumDimens,
+            ),
             padding: const EdgeInsets.symmetric(
               horizontal: 16.0,
               vertical: 8.0,
@@ -96,14 +114,14 @@ class _SideUserInfoScreenState extends State<SideUserInfoScreen> {
                       "Sciences Informatiques",
                       style: TextStyle(color: Colors.grey.shade700),
                     ),
-                    Text(
-                      "Genie Logiciel",
+                    const Text(
+                      "Génie Logiciel",
                       style:
                       TextStyle(color: Colors.black54),
                     ),
                   ],
                 ),
-                SizedBox(height: 8.0,),
+                const SizedBox(height: 8.0,),
               ],
             ),
           ),
@@ -130,7 +148,7 @@ class _SideUserInfoScreenState extends State<SideUserInfoScreen> {
                           child: const Icon(Icons.menu_book),
 
                         ),
-                        SizedBox(width: 8.0,),
+                        const SizedBox(width: 8.0,),
                         Container(
                           alignment: Alignment.centerLeft,
                           child: Column(
@@ -165,7 +183,7 @@ class _SideUserInfoScreenState extends State<SideUserInfoScreen> {
                           child: const Icon(Icons.person_outline),
 
                         ),
-                        SizedBox(width: 8.0,),
+                        const SizedBox(width: 8.0,),
                         Container(
                           alignment: Alignment.centerLeft,
                           child: Column(
@@ -193,18 +211,13 @@ class _SideUserInfoScreenState extends State<SideUserInfoScreen> {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  Row(children: const[Text("My Course & Notes"),],),
+                  Row(children: const [Text("Mes Cours & Notes"),],),
 
                   const SizedBox(height: 8.0,),
                   Column(
-                    children: [
-                      for (var i = 0; i <= 8; i++)
-                        Container(
-                          margin: EdgeInsets.all(8.0),
-                          height: 45,
-                          child: Placeholder(),
-                        )
-                    ],
+                    children: popularCourseList
+                        .map((category) => CourseListTile(category: category))
+                        .toList()..length = 7,
                   ),
                 ],
               ),
@@ -214,6 +227,87 @@ class _SideUserInfoScreenState extends State<SideUserInfoScreen> {
       ),
     );
   }
+
+  static List<CourseCategory> popularCourseList = <CourseCategory>[
+    CourseCategory(
+      imagePath: 'assets/design_course/interFace3.png',
+      title: 'Entreprenariat & OGE',
+      lessonCredit: 2,
+      //hours: 25,
+      rating: 4.8,
+    ),
+    CourseCategory(
+      imagePath: 'assets/design_course/interFace4.png',
+      title: 'Pragrammation Web',
+      lessonCredit: 8,
+      //hours: 208,
+      rating: 4.9,
+    ),
+    CourseCategory(
+      imagePath: 'assets/design_course/interFace3.png',
+      title: 'Education à la citoyenneté',
+      lessonCredit: 1,
+      //hours: 25,
+      rating: 4.8,
+    ),
+    CourseCategory(
+      imagePath: 'assets/design_course/interFace4.png',
+      title: 'Analyse Numérique',
+      lessonCredit: 2,
+      //hours: 208,
+      rating: 4.9,
+    ),
+    CourseCategory(
+      imagePath: 'assets/design_course/interFace4.png',
+      title: 'Statistique & Proba',
+      lessonCredit: 2,
+      //hours: 208,
+      rating: 4.9,
+    ),
+    CourseCategory(
+      imagePath: 'assets/design_course/interFace4.png',
+      title: 'Algorithmique avancée',
+      lessonCredit: 8,
+      //hours: 208,
+      rating: 4.9,
+    ),
+    CourseCategory(
+      imagePath: 'assets/design_course/interFace4.png',
+      title: 'Analyse Numérique',
+      lessonCredit: 2,
+      //hours: 208,
+      rating: 4.9,
+    ),
+
+    CourseCategory(
+      imagePath: 'assets/design_course/interFace4.png',
+      title: 'Structure de donneés',
+      lessonCredit: 2,
+      //hours: 208,
+      rating: 4.9,
+    ),
+    CourseCategory(
+      imagePath: 'assets/design_course/interFace4.png',
+      title: 'Expression Orale et Ecrit',
+      lessonCredit: 8,
+      //hours: 208,
+      rating: 4.9,
+    ),
+    CourseCategory(
+      imagePath: 'assets/design_course/interFace3.png',
+      title: 'Machine Electrique',
+      lessonCredit: 1,
+      //hours: 25,
+      rating: 4.8,
+    ),
+    CourseCategory(
+      imagePath: 'assets/design_course/interFace4.png',
+      title: 'Méchanique Rationnelle',
+      lessonCredit: 2,
+      //hours: 208,
+      rating: 4.9,
+    ),
+  ];
 }
 
 
