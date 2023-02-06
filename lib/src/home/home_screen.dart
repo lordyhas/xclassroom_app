@@ -1,57 +1,205 @@
-part of home;
+part of dashboard;
 
 
-class ScreenHome extends StatefulWidget {
-  const ScreenHome({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  static const routeName = "home_screen";
+  static const routeUrl = "/home";
+  const HomeScreen({Key? key, this.isOnWeb = false}) : super(key: key);
+
+  final bool isOnWeb;
 
   @override
-  _ScreenHomeState createState() => _ScreenHomeState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _ScreenHomeState extends State<ScreenHome> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 8.0),
-      child: BlocBuilder<SwitchHomeCubit, CategoryType>(
-        builder: (context, state) {
-          switch (state) {
-            case CategoryType.home:
-              return const MenuContainerHome();
-            case CategoryType.course:
-              return Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
-                //crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  //const CourseRowListView(),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 18, right: 16),
-                    child: Text(
-                      'Mes Cours',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                        letterSpacing: 0.27,
-                        color: AppTheme.darkerText,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      //padding: const EdgeInsets.only(left: 18, right: 16),
-                      child: CourseGridListView(
-                        callBack: () {},
-                      ),
-                    ),
-                  ),
-                ],
-              );
+    return  BooleanBuilder(
+      condition: () => Responsive.of(context).isPhone,
 
-            case CategoryType.planning:
-              return Column();
-          }
-        },
+      /// Medium Mobile HomeScreen
+      ifTrue: Container(
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          width: kIsWeb ? MediaQuery.of(context).size.width * 0.9 : null,
+          child: Column(
+            children:  <Widget>[
+              //getSearchBarUI(),
+              const TabBarView(),
+              Flexible(
+                child:  Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: BlocBuilder<NavigationController, NavigationStateScreen>(
+                    builder: (context, state) {
+                      switch (state.screen) {
+                        case NavigationScreen.home:
+                          return const MenuContainerHome();
+                        case NavigationScreen.course:
+                          return Column(
+                            //mainAxisAlignment: MainAxisAlignment.center,
+                            //crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              //const CourseRowListView(),
+                              const Padding(
+                                padding: EdgeInsets.only(left: 18, right: 16),
+                                child: Text(
+                                  'Mes Cours',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 18,
+                                    letterSpacing: 0.27,
+                                    color: AppTheme.darkerText,
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                child: Container(
+                                  //padding: const EdgeInsets.only(left: 18, right: 16),
+                                  child: CourseGridListView(
+                                    callBack: () {},
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+
+                        case NavigationScreen.planning:
+                          return Column();
+                      }
+                    },
+                  ),
+                ),
+              ),
+
+
+            ],
+          ),
+        ),
+      ),
+      /// Dashboard Web HomeScreen
+      ifFalse: Container(
+          child: Container(
+            color: Colors.grey.shade300.withOpacity(0.8),
+            child: Column(
+              //mainAxisAlignment: MainAxisAlignment.center,
+              //crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const AppBarCoolUI(
+                  showDrawerButton: false,
+                  //onDrawerTap: openDrawer,
+                ),
+
+                //const CourseRowListView(),
+                const SizedBox(
+                  height: 8.0,
+                ),
+                Flexible(
+                  child: BlocBuilder<NavigationController, NavigationStateScreen>(
+                    builder: (context, state) {
+                      switch (state.screen) {
+                        case NavigationScreen.home:
+                        case NavigationScreen.course:
+                          return Column(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.only(
+                                    left: 18, right: 16),
+                                child: Row(
+                                  children: const [
+                                    Text(
+                                      'Mes Cours',
+                                      textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 18,
+                                        letterSpacing: 0.27,
+                                        color: AppTheme.darkerText,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: CourseGridListView(
+                                  callBack: () {},
+                                ),
+                              ),
+                            ],
+                          );
+                        case NavigationScreen.planning:
+                          return Expanded(
+                            child: Column(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.only(
+                                    left: 18,
+                                    right: 16,
+                                  ),
+                                  child: Row(
+                                    children: const [
+                                      Text(
+                                        'Horaire',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 18,
+                                          letterSpacing: 0.27,
+                                          color: AppTheme.darkerText,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Center(
+                                  child: Container(
+                                      constraints: const BoxConstraints(
+                                        maxWidth: kMediumDimens,
+                                      ),
+                                      child: Column(
+                                        children: const [
+                                          SizedBox(
+                                              height: 100,
+                                              child: Placeholder()),
+                                          SizedBox(
+                                            height: 8.0,
+                                          ),
+                                          SizedBox(
+                                              height: 100,
+                                              child: Placeholder()),
+                                          SizedBox(
+                                            height: 8.0,
+                                          ),
+                                          SizedBox(
+                                              height: 100,
+                                              child: Placeholder()),
+                                          SizedBox(
+                                            height: 8.0,
+                                          ),
+                                          SizedBox(
+                                              height: 100,
+                                              child: Placeholder()),
+                                          SizedBox(
+                                            height: 8.0,
+                                          ),
+                                          SizedBox(
+                                              height: 100,
+                                              child: Placeholder()),
+                                        ],
+                                      )),
+                                )
+                              ],
+                            ),
+                          );
+                      }
+                    },
+                  ),
+                ),
+
+              ],
+            ),
+          ),
       ),
     );
   }
@@ -67,37 +215,36 @@ class TabBarView extends StatelessWidget {
       width: !kIsWeb ? null : MediaQuery
           .of(context)
           .size
-          .width*0.75,
+          .width*0.8,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           const SizedBox(height: 4),
-          BlocBuilder<SwitchHomeCubit, CategoryType>(
+          BlocBuilder<NavigationController, NavigationStateScreen>(
             builder: (context, state) {
               return Padding(
-                padding: const EdgeInsets.only(left: 16, right: 16),
+                padding: const EdgeInsets.only(left: 8, right: 8),
                 child: Row(
                   children: <Widget>[
                     TabBarButton(
                       title: "Home",
-                        onTap: () => BlocProvider.of<SwitchHomeCubit>(context)
-                            .change(CategoryType.home),
-                        isSelected: state == CategoryType.home),
+                        onTap: () => BlocProvider.of<NavigationController>(context)
+                            .change(NavigationScreen.home),
+                        isSelected: state.screen == NavigationScreen.home),
                     const SizedBox(width: 16),
-
                     TabBarButton(
                         title: "Cours",
-                        onTap: () => BlocProvider.of<SwitchHomeCubit>(context)
-                              .change(CategoryType.course),
-                        isSelected: state == CategoryType.course),
+                        onTap: () => BlocProvider.of<NavigationController>(context)
+                              .change(NavigationScreen.course),
+                        isSelected: state.screen == NavigationScreen.course),
                     const SizedBox(width: 16),
                     TabBarButton(
                         title: "Horaire",
                         onTap: () => BlocProvider
-                            .of<SwitchHomeCubit>(context)
-                            .change(CategoryType.planning),
-                        isSelected: state == CategoryType.planning),
+                            .of<NavigationController>(context)
+                            .change(NavigationScreen.planning),
+                        isSelected: state.screen == NavigationScreen.planning),
                   ],
                 ),
               );

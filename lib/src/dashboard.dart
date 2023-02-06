@@ -1,90 +1,108 @@
 library dashboard;
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 import 'package:unhorizons/logic/values.dart';
-import 'package:unhorizons/src/home_page.dart';
+import 'package:unhorizons/widgets/course_list_tile.dart';
 import 'package:unhorizons/widgets/widgets.dart';
 
+import 'package:unhorizons/res.dart';
+
 part 'dashboard/side_drawer.dart';
+
 part 'dashboard/side_profile.dart';
 
-class Dashboard extends StatefulWidget {
-  const Dashboard({Key? key}) : super(key: key);
+part 'home/home_screen.dart';
 
-  @override
-  State<Dashboard> createState() => _DashboardState();
-}
+part 'home/menu_home.dart';
 
-class _DashboardState extends State<Dashboard> {
+part 'user_info_screen.dart';
+
+part 'home_page.dart';
+
+const double maxUserSideAppear = 1500;
+
+class Dashboard extends StatelessWidget {
+  static const routeName = "root_page";
+
+  final Widget? child;
+
+  const Dashboard({Key? key, this.child}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    debugPrint("screen w : $screenWidth");
-    final double tempHeight = MediaQuery.of(context).size.height -
-        (MediaQuery.of(context).size.width / 1.2) + 24.0;
-    return Scaffold(
-      drawer: Drawer(
-        child: Column(
-          children:  const [
-            DrawerHeader(child: SizedBox(),),
+    if (kDebugMode) {
+      print("${Responsive.of(context).size} =========================");
+    }
+    return BooleanBuilder(
+      condition: () => Responsive.of(context).isPhone,
+      ifTrue:  HomePage(child: child),
+      ifFalse:  DashboardWeb(child: child),
+    );
+  }
+}
 
-          ],
-        ),
-      ),
-      body:  SizedBox(
+class DashboardWeb extends StatefulWidget {
+  const DashboardWeb({Key? key, this.child}) : super(key: key);
+
+  final Widget? child;
+
+  @override
+  State<DashboardWeb> createState() => _DashboardWebState();
+}
+
+class _DashboardWebState extends State<DashboardWeb> {
+  void openDrawer() {
+    if (Scaffold.of(context).isDrawerOpen) {
+      Scaffold.of(context).closeDrawer();
+    } else {
+      Scaffold.of(context).openDrawer();
+    }
+  }
+
+  void setOff(){
+    GoRouter.of(context).addListener(() {
+      if (kDebugMode) {
+        print('_DashboardWebState.setOff');
+        print('${GoRouter.of(context).location} =====  ====');
+      }
+    });
+    /*if(GoRouter.of(context).location == UserInfoScreen.routeName){
+
+    }*/
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
+
+    final double screenWidth = MediaQuery.of(context).size.width;
+    //debugPrint("screen w : $screenWidth");
+    final double tempHeight = MediaQuery.of(context).size.height -
+        (MediaQuery.of(context).size.width / 1.2) +
+        24.0;
+    return Scaffold(
+      body: SizedBox(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Row(
           children: [
             ///------------------ SIDE DRAWER ------------------------
             const SideDrawer(),
+
             /// ----------------- HOME SCREEN ------------------------
-            Expanded(
-                child: Container(
-                  color: Colors.grey.shade300.withOpacity(0.8),
-                  child: Column(
-                    //mainAxisAlignment: MainAxisAlignment.center,
-                    //crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      const AppBarCoolUI(),
-
-                      //const CourseRowListView(),
-                      const SizedBox(height: 8.0,),
-                      Container(
-                        padding: const EdgeInsets.only(left: 18, right: 16),
-                        child: Row(
-                          children: const [
-                            Text(
-                              'Mes Cours',
-                              textAlign: TextAlign.left,
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 18,
-                                letterSpacing: 0.27,
-                                color: AppTheme.darkerText,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-
-                      Expanded(
-                        child: CourseGridListView(
-                          callBack: () {},
-                        ),
-                      )
-                    ],
-                  ),
-                )
+            Flexible(
+              child: SizedBox(
+                child: widget.child,
+              ),
             ),
+
             /// ----------------- SIDE PROFILE -----------------------
-            if(screenWidth > 1330)
-            Container(
-              margin: const EdgeInsets.only(left: 16,right: 8.0),
-              width: 350,
-              child: const SideUserInfoScreen(),
-            )
+            if (screenWidth > maxUserSideAppear ||  BlocProvider.of<NavigationController>(context).isProfileNotOpen)
+              const SideUserInfoScreen(),
           ],
         ),
       ),

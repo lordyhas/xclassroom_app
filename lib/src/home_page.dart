@@ -1,27 +1,9 @@
-library home;
-import 'package:flutter/foundation.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-
-
-import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:unhorizons/logic/values/dimens.dart';
-import 'package:unhorizons/widgets/widgets.dart';
-
-
-import 'package:unhorizons/logic/values.dart';
-
-import 'package:unhorizons/res.dart';
-import '../widgets/menu_wrapable_widget.dart';
-import '../widgets/course_grid_view.dart';
-import '../widgets/course_row_view.dart';
-
-part 'home/home_screen.dart';
-part 'home/menu_home.dart';
-part 'user_info_screen.dart';
+part of dashboard;
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key, this.child}) : super(key: key);
+
+  final Widget? child;
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -40,24 +22,45 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.nearlyWhite,
-      body: Column(
-        children: <Widget>[
-          SizedBox(height: MediaQuery.of(context).padding.top,),
-          const AppBarCoolUI(),
-          Expanded(
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height,
-              width: kIsWeb ? MediaQuery.of(context).size.width * 0.9 : null,
-              child: Column(
-                children: const <Widget>[
-                  //getSearchBarUI(),
-                  TabBarView(),
-                  Flexible(child: ScreenHome()),
-                ],
+      drawer: Drawer(
+        child: Column(
+          children:  [
+            DrawerHeader(child: SizedBox.square(
+              dimension: 200,
+              child: Image.asset("assets/vectors/vector_cap2a.png"),),
+            ),
+            const Expanded(
+              child: SingleChildScrollView(
+                child: DrawerContent(),
               ),
             ),
-          ),
-        ],
+            const Divider(),
+            const DrawerFooter(showProfileItem: true,),
+          ],
+        ),
+      ),
+      body: Builder(
+        builder: (context) {
+          return Column(
+            children: <Widget>[
+              SizedBox(height: MediaQuery.of(context).padding.top,),
+              AppBarCoolUI(
+                onDrawerTap: (){
+                  if(Scaffold.of(context).isDrawerOpen){
+                    Scaffold.of(context).closeDrawer();
+                  }else{
+                    Scaffold.of(context).openDrawer();
+                  }
+                },
+              ),
+              ///------ -----
+              Flexible(
+                child: SizedBox(child: widget.child,),
+              ),
+
+            ],
+          );
+        }
       ),
     );
   }
@@ -148,14 +151,28 @@ class _HomePageState extends State<HomePage> {
 
 
 class AppBarCoolUI extends StatelessWidget {
-  const AppBarCoolUI({Key? key}) : super(key: key);
+  final bool showDrawerButton;
+  final void Function()? onDrawerTap;
+  const AppBarCoolUI({
+    this.showDrawerButton = true,
+    this.onDrawerTap,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 8.0, left: 18, right: 18),
+      padding: const EdgeInsets.only(top: 8.0, right: 18),
       child: Row(
         children: <Widget>[
+          if(showDrawerButton)
+          Padding(
+            padding: const EdgeInsets.only(),
+            child: IconButton(
+                onPressed: onDrawerTap,
+                icon: const Icon(Icons.menu)),
+          ),
+          const SizedBox(width: 18,),
           Expanded(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -190,12 +207,7 @@ class AppBarCoolUI extends StatelessWidget {
             height: 60,
             child: InkWell(
                 onTap: () {
-                  Navigator.push<void>(
-                    context,
-                    MaterialPageRoute<void>(
-                      builder: (BuildContext context) => const UserInfoScreen(),
-                    ),
-                  );
+                  GoRouter.of(context).goNamed(UserInfoScreen.routeName);
                 },
                 child: Image.asset('assets/design_course/userImage.png')
             ),

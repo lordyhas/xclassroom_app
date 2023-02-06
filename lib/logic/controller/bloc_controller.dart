@@ -2,8 +2,8 @@ library app_bloc;
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-export 'switch_home_bloc/switch_home_cubit.dart';
-export 'navigation_controller_cubit.dart';
+export 'navigation_controller_bloc/navigation_controller_cubit.dart';
+
 
 
 class AppBlocObserver extends BlocObserver {
