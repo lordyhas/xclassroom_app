@@ -1,24 +1,10 @@
 part of  'main.dart';
 
 
-class MainPage extends StatelessWidget {
-  static const routeName = "root_page";
-  const MainPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    if (kDebugMode) {
-      print("${Responsive.of(context).size} =========================");
-    }
-    return BooleanBuilder(
-      condition: () => Responsive.of(context).isPhone,
-      ifTrue: const HomePage(),
-      ifFalse: const Dashboard(),
-    );
-  }
-}
 
 class IntroPage extends StatelessWidget {
+  static const routeName = "intro_page";
+  static const routeUrl = "/myspace/login";
   const IntroPage({Key? key}) : super(key: key);
 
   @override
@@ -34,7 +20,7 @@ class IntroPage extends StatelessWidget {
             PageViewModel(
               title: "Title of orange text and bold page",
               body: "This is a description on a page with an orange title and bold, big body.",
-              image: Image.asset("assets/design_course/lesson_vector0.png",),
+              image: Image.asset("assets/vectors/vector_cap2b.png",),
               decoration: const PageDecoration(
                 titleTextStyle: TextStyle(color: Colors.orange),
                 bodyTextStyle: TextStyle(fontWeight: FontWeight.w700, fontSize: 20.0),
@@ -43,7 +29,7 @@ class IntroPage extends StatelessWidget {
             PageViewModel(
               title: "Title of orange text and bold page",
               body: "This is a description on a page with an orange title and bold, big body.",
-              image: Image.asset("assets/design_course/lesson_vector1.jpg",),
+              image: Image.asset("assets/design_course/lesson_vector0.png",),
               decoration: const PageDecoration(
                 titleTextStyle: TextStyle(color: Colors.orange),
                 bodyTextStyle: TextStyle(
@@ -56,17 +42,20 @@ class IntroPage extends StatelessWidget {
 
               title: "Title of custom button page",
               body: "This is a description on a page with a custom button below.",
-              image: Image.asset("assets/design_course/lesson_vector4.jpg",),
+              image: Image.asset("assets/vectors/vector2.png",),
             ),
             PageViewModel(
               title: "Title of custom button page",
               body: "This is a description on a page with a custom button below.",
-              image: Image.asset("assets/design_course/lesson_vector3.jpg"),
+              image: Image.asset("assets/vectors/vector3.png"),
             ),
             PageViewModel(
               reverse: true,
-              title: "Welcome to Student Space",
-              body: "Login ot register to continue.",
+              titleWidget: SizedBox.square(
+                dimension: 250,
+                child: Image.asset("assets/vectors/vector_cap2a.png"),),
+              //title: "Welcome to Student Space",
+              body: "Welcome to Student Space \nLogin or register to continue.",
 
               //body: "This is a description on a page with a custom button below.",
               image: Center(
@@ -74,7 +63,7 @@ class IntroPage extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 0.0),
                   child: Container(
                     constraints: const BoxConstraints(maxWidth: 400,),
-                    child: const Login1Widget(),
+                    child: const LoginView(),
                   ),
                 ),
               ),
@@ -84,13 +73,9 @@ class IntroPage extends StatelessWidget {
           skip: const Text("Skip"),
           next: const Text("Next"),
           done: const Text("Login"),
-          onDone: () {
-            Navigator.pushReplacement(context, MaterialPageRoute<void>(
-              builder: (BuildContext context) => const MainPage(),
-            ),);
+          onDone: () => GoRouter.of(context).goNamed(HomeScreen.routeName),
 
-            debugPrint('XXXVIII');
-          },
+
           baseBtnStyle: TextButton.styleFrom(
             backgroundColor: Colors.white,
           ),
@@ -112,9 +97,15 @@ class IntroPage extends StatelessWidget {
 
 
 
-class Login1Widget extends StatelessWidget {
-  const Login1Widget({Key? key}) : super(key: key);
+class LoginView extends StatefulWidget {
+  const LoginView({Key? key}) : super(key: key);
 
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  bool showPassword = true;
   @override
   Widget build(BuildContext context) {
     return
@@ -135,10 +126,21 @@ class Login1Widget extends StatelessWidget {
               vertical: 8,
               horizontal: 30,
             ),
+            alignment: Alignment.center,
+
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(.15),
+              borderRadius: BorderRadius.circular(10),
+            ),
             child: const TextField(
+              keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                hintText: 'Phone / Email / Account',
-                labelText: 'account number',
+                border: InputBorder.none,
+                prefixIcon: Icon(Icons.person,
+                  color: Colors.grey,
+                ),
+                hintText: 'UID / Email / Phone',
+                labelText: 'account id',
               ),
             ),
           ),
@@ -147,9 +149,31 @@ class Login1Widget extends StatelessWidget {
               vertical: 8,
               horizontal: 30,
             ),
-            child: const TextField(
+            alignment: Alignment.center,
+
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(.15),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: TextField(
+              //keyboardType: TextInputType.emailAddress,
+              obscureText: showPassword,
               decoration: InputDecoration(
-                hintText: 'Please enter your account password',
+
+                prefixIcon: const Icon(Icons.lock_outline,
+                  color: Colors.grey,
+                ),
+                border: InputBorder.none,
+                suffixIcon: IconButton(
+                  icon: Icon(showPassword? CupertinoIcons.eye_slash : CupertinoIcons.eye),
+                  onPressed: (){
+                    setState(() {
+                      showPassword = !showPassword;
+                    });
+
+                  },
+                ),
+                hintText: 'Please enter your password',
                 labelText: 'password',
               ),
             ),
@@ -161,9 +185,21 @@ class Login1Widget extends StatelessWidget {
               horizontal: 30,
             ),
             child: Row(
-              children: const <Widget>[
-                Expanded(flex: 1, child: Text('forget password')),
-                Expanded(flex: 0, child: Text('Register Account')),
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Container(
+
+                  child: TextButton(
+                    onPressed: () {  },
+                    child: const Text('Forget password'),
+                  ),
+                ),
+                Container(
+
+                  child: TextButton(
+                    onPressed: () {  },
+                    child: const Text('Créer un compte'),),
+                ),
               ],
             ),
           ),
@@ -205,10 +241,10 @@ class Login1Widget extends StatelessWidget {
                     width: 50,
                     height: 50,
                     decoration: const BoxDecoration(
-                      color: Colors.green,
+                      color: Colors.teal,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(FontAwesomeIcons.google),
+                    child: const Icon(FontAwesomeIcons.google),
                   ),
                 ),
                 Expanded(
@@ -216,10 +252,10 @@ class Login1Widget extends StatelessWidget {
                     width: 50,
                     height: 50,
                     decoration: const BoxDecoration(
-                      color: Colors.green,
+                      color: Colors.teal,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(FontAwesomeIcons.yahoo),
+                    child: const Icon(FontAwesomeIcons.yahoo),
                   ),
                 ),
                 Expanded(
@@ -227,10 +263,10 @@ class Login1Widget extends StatelessWidget {
                     width: 50,
                     height: 50,
                     decoration: const BoxDecoration(
-                      color: Colors.green,
+                      color: Colors.teal,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(FontAwesomeIcons.amazon),
+                    child: const Icon(FontAwesomeIcons.amazon),
                   ),
                 ),
                 Expanded(
@@ -238,10 +274,10 @@ class Login1Widget extends StatelessWidget {
                     width: 50,
                     height: 50,
                     decoration: const BoxDecoration(
-                      color: Colors.green,
+                      color: Colors.teal,
                       shape: BoxShape.circle,
                     ),
-                    child: Icon(FontAwesomeIcons.facebook),
+                    child: const Icon(FontAwesomeIcons.facebook),
                   ),
                 ),
               ],

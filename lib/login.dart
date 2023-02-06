@@ -8,7 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:formz/formz.dart';
 
 import 'package:unhorizons/logic/controller/authentication_bloc/auth_repository/setup.dart';
-import 'package:unhorizons/logic/controller/authentication_bloc/authentication_bloc.dart';
+import 'package:unhorizons/logic/controller/authentication_bloc/auth_controller_bloc.dart';
 
 import 'logic/controller/login_bloc/login_cubit.dart';
 import 'logic/values.dart';
