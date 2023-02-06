@@ -1,4 +1,4 @@
-part of home;
+part of dashboard;
 
 
 class MenuContainerHome extends StatefulWidget {
@@ -8,8 +8,7 @@ class MenuContainerHome extends StatefulWidget {
   _MenuContainerHomeState createState() => _MenuContainerHomeState();
 }
 
-class _MenuContainerHomeState extends State<MenuContainerHome>
-{
+class _MenuContainerHomeState extends State<MenuContainerHome> {
 
   @override
   Widget build(BuildContext context) {
