@@ -7,23 +7,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unhorizons/logic/values.dart';
 import 'package:unhorizons/widgets/course_list_tile.dart';
-import 'package:unhorizons/widgets/widgets.dart';
 
-import 'package:unhorizons/res.dart';
-
-part 'dashboard/side_drawer.dart';
-
-part 'dashboard/side_profile.dart';
-
-part 'home/home_screen.dart';
-
-part 'home/menu_home.dart';
-
-part 'user_info_screen.dart';
-
-part 'home_page.dart';
-
-const double maxUserSideAppear = 1500;
+part 'dashboard_part/side_drawer.dart';
+part 'dashboard_part/side_profile.dart';
 
 class Dashboard extends StatelessWidget {
   static const routeName = "root_page";
@@ -39,22 +25,22 @@ class Dashboard extends StatelessWidget {
     }
     return BooleanBuilder(
       condition: () => Responsive.of(context).isPhone,
-      ifTrue:  HomePage(child: child),
-      ifFalse:  DashboardWeb(child: child),
+      ifTrue:  HomePhoneUI(child: child),
+      ifFalse: HomeWebUI(child: child),
     );
   }
 }
 
-class DashboardWeb extends StatefulWidget {
-  const DashboardWeb({Key? key, this.child}) : super(key: key);
+class HomeWebUI extends StatefulWidget {
+  const HomeWebUI({Key? key, this.child}) : super(key: key);
 
   final Widget? child;
 
   @override
-  State<DashboardWeb> createState() => _DashboardWebState();
+  State<HomeWebUI> createState() => _HomeWebUIState();
 }
 
-class _DashboardWebState extends State<DashboardWeb> {
+class _HomeWebUIState extends State<HomeWebUI> {
   void openDrawer() {
     if (Scaffold.of(context).isDrawerOpen) {
       Scaffold.of(context).closeDrawer();
@@ -78,12 +64,6 @@ class _DashboardWebState extends State<DashboardWeb> {
   @override
   Widget build(BuildContext context) {
 
-
-    final double screenWidth = MediaQuery.of(context).size.width;
-    //debugPrint("screen w : $screenWidth");
-    final double tempHeight = MediaQuery.of(context).size.height -
-        (MediaQuery.of(context).size.width / 1.2) +
-        24.0;
     return Scaffold(
       body: SizedBox(
         height: MediaQuery.of(context).size.height,
@@ -101,7 +81,8 @@ class _DashboardWebState extends State<DashboardWeb> {
             ),
 
             /// ----------------- SIDE PROFILE -----------------------
-            if (screenWidth > maxUserSideAppear ||  BlocProvider.of<NavigationController>(context).isProfileNotOpen)
+            if (Responsive.of(context).isMaxSize ||  BlocProvider
+                .of<NavigationController>(context).isProfileNotOpen)
               const SideUserInfoScreen(),
           ],
         ),
@@ -109,51 +90,66 @@ class _DashboardWebState extends State<DashboardWeb> {
     );
   }
 
-  Widget _getTimeBoxUI(String text1, String txt2) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          color: AppTheme.nearlyWhite,
-          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
-          boxShadow: <BoxShadow>[
-            BoxShadow(
-                color: AppTheme.grey.withOpacity(0.2),
-                offset: const Offset(1.1, 1.1),
-                blurRadius: 8.0),
+}
+
+
+class HomePhoneUI extends StatefulWidget {
+  const HomePhoneUI({Key? key, this.child}) : super(key: key);
+
+  final Widget? child;
+
+  @override
+  State<HomePhoneUI> createState() => _HomePhoneUIState();
+}
+
+class _HomePhoneUIState extends State<HomePhoneUI> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppTheme.nearlyWhite,
+      drawer: Drawer(
+        child: Column(
+          children:  [
+            DrawerHeader(child: SizedBox.square(
+              dimension: 200,
+              child: Image.asset("assets/vectors/vector_cap2a.png"),),
+            ),
+            const Expanded(
+              child: SingleChildScrollView(
+                child: DrawerContent(),
+              ),
+            ),
+            const Divider(),
+            const DrawerFooter(showProfileItem: true,),
           ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.only(
-              left: 18.0, right: 18.0, top: 12.0, bottom: 12.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                text1,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  letterSpacing: 0.27,
-                  color: AppTheme.nearlyBlue,
+      ),
+      body: Builder(
+          builder: (context) {
+            return Column(
+              children: <Widget>[
+                SizedBox(height: MediaQuery.of(context).padding.top,),
+
+                ///------ -----
+                Flexible(
+                  child: SizedBox(child: widget.child,),
                 ),
-              ),
-              Text(
-                txt2,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w200,
-                  fontSize: 14,
-                  letterSpacing: 0.27,
-                  color: AppTheme.grey,
-                ),
-              ),
-            ],
-          ),
-        ),
+
+              ],
+            );
+          }
       ),
     );
   }
+
+
 }
+
+
+

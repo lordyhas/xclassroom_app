@@ -14,7 +14,7 @@ export 'values/colors_theme.dart';
 export 'values/dimens.dart';
 export 'package:utils_component/utils_component.dart';
 
-
+const double _maxUserSideAppear = 1500;
 
 class Responsive {
   final BuildContext context;
@@ -26,7 +26,14 @@ class Responsive {
   bool get isWeb => size.width > kPhoneDimens || kIsWeb;
   bool get isWebPlatform => kIsWeb;
   bool get isDesktop => size.width > kPhoneDimens;
+
+  bool get isMaxSize => size.width > _maxUserSideAppear;
+
 }
+
+
+
+
 
 
 class HexColor extends Color {

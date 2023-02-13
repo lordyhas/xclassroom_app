@@ -1,4 +1,4 @@
-part of dashboard;
+part of home_page;
 
 
 class MenuContainerHome extends StatefulWidget {

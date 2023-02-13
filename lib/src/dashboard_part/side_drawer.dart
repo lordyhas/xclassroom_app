@@ -27,7 +27,6 @@ class _SideDrawerState extends State<SideDrawer> with TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
     return Container(
       color: Colors.grey.withOpacity(0.1),
       padding: const EdgeInsets.only(right: 16),
@@ -68,7 +67,7 @@ class _SideDrawerState extends State<SideDrawer> with TickerProviderStateMixin{
           ),
           const Divider(),
           DrawerFooter(
-            showProfileItem: !(width > maxUserSideAppear),
+            showProfileItem: !(Responsive.of(context).isMaxSize),
             showPlanningItem: true,
           ),
         ],
@@ -101,13 +100,25 @@ class DrawerFooter extends StatelessWidget {
           }
         ),
         if(showPlanningItem)
-        ListTile(
-          leading: const Icon(Icons.schedule_outlined),
-          title: const Text("Horaire de la semaine"),
-          onTap: () => BlocProvider
-              .of<NavigationController>(context)
-              .change(NavigationScreen.planning),
-        ),
+          Column(
+            children: [
+              ListTile(
+                leading: const Icon(Icons.menu_book),
+                title: const Text("Mes Course"),
+                onTap: () => BlocProvider
+                    .of<NavigationController>(context)
+                    .change(NavigationScreen.course),
+              ),
+              ListTile(
+                leading: const Icon(Icons.schedule_outlined),
+                title: const Text("Horaire de la semaine"),
+                onTap: () => BlocProvider
+                    .of<NavigationController>(context)
+                    .change(NavigationScreen.planning),
+              ),
+            ],
+          ),
+
 
         ListTile(
           leading: const Icon(Icons.settings),

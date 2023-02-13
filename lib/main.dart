@@ -19,9 +19,10 @@ import 'package:unhorizons/logic/controller/authentication_bloc/auth_repository/
 import 'package:unhorizons/logic/controller/authentication_bloc/auth_controller_bloc.dart';
 
 import 'package:unhorizons/logic/controller/student_status_controller_cubit.dart';
+import 'package:unhorizons/src/home_page.dart';
 
 
-import 'on_error_page.dart';
+import 'package:unhorizons/on_error_page.dart';
 
 
 

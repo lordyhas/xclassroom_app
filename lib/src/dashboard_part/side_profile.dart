@@ -1,5 +1,7 @@
 part of dashboard;
 
+
+/// UserInfoScreen Page resized to appear in HomePage at right-side
 class SideUserInfoScreen extends StatelessWidget {
   const SideUserInfoScreen({Key? key}) : super(key: key);
 
@@ -13,7 +15,7 @@ class SideUserInfoScreen extends StatelessWidget {
   }
 }
 
-
+/// Normal UserInfoScreen Page
 class UserInfoScreen extends StatefulWidget {
   static const routeName = "user-profile";
   //static const routeUrl = "/admission/introduction";
