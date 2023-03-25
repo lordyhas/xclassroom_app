@@ -43,8 +43,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
 
                 children: [
                   Row(
-                    mainAxisAlignment:
-                    MainAxisAlignment.spaceBetween,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text(
                         "My Profile",
@@ -101,7 +100,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100.0),
                     child: Image.asset(
-                        'assets/avatar/profile_avatar3.jpg'),
+                        'assets/avatar/profile1.jpg'),
                   ),
                 ),
                 Column(
@@ -162,7 +161,7 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              Text("Cours",textAlign: TextAlign.start,),
+                              Text("Cours", textAlign: TextAlign.start,),
                             ],
                           ),
                         )

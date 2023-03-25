@@ -15,15 +15,20 @@ enum NavigationScreen {
 class NavigationStateScreen {
   final NavigationScreen screen;
   final bool isProfileOpen;
+  final bool isHomeOpen;
   const NavigationStateScreen._({
     this.screen = NavigationScreen.course,
     this.isProfileOpen = false,
+    this.isHomeOpen = false,
   });
   const NavigationStateScreen.initial() : this._();
   const NavigationStateScreen.screen(NavigationScreen screen)
       : this._(screen: screen);
-  const NavigationStateScreen.setOpen(bool isProfileOpen)
-      : this._(isProfileOpen: isProfileOpen);
+  const NavigationStateScreen.setOpen({bool? isProfileOpen, bool? isHomeOpen})
+      : this._(
+    isProfileOpen: isProfileOpen ?? false,
+    isHomeOpen: isHomeOpen ?? false,
+  );
 
   NavigationStateScreen copyWith({
     NavigationScreen? screen,

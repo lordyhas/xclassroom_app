@@ -136,7 +136,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           ],
                         );
                       case NavigationScreen.planning:
-                        return Expanded(
+                        return Container(
+
                           child: Column(
                             children: [
                               Container(
@@ -167,34 +168,37 @@ class _HomeScreenState extends State<HomeScreen> {
                                     ),
                                     child: Stack(
                                       children: [
+
+                                        const PlanningView(),
                                         Align(
                                           alignment : Alignment.topCenter,
                                           child: Container(
                                             height: 50,
                                             decoration:  BoxDecoration(
                                               gradient: LinearGradient(
-                                                begin: Alignment.bottomCenter,
-                                                end: Alignment.topCenter,
+                                                begin: Alignment. topCenter,
+                                                end: Alignment.bottomCenter,
 
                                                 colors: [
                                                   Colors.grey.shade300.withOpacity(0.8),
                                                   Colors.grey.shade300.withOpacity(0.8),
+                                                  Colors.grey.shade300.withOpacity(0.8),
+                                                  Colors.grey.shade300.withOpacity(0.8),
+                                                  Colors.grey.shade300.withOpacity(0.8),
                                                   Colors.grey.shade300.withOpacity(0.6),
                                                   Colors.grey.shade300.withOpacity(0.5),
-                                                  Colors.grey.shade300.withOpacity(0.5),
+                                                  Colors.grey.shade300.withOpacity(0.4),
                                                   Colors.grey.shade300.withOpacity(0.4),
                                                   Colors.grey.shade300.withOpacity(0.3),
                                                   Colors.grey.shade300.withOpacity(0.3),
                                                   Colors.grey.shade300.withOpacity(0.2),
-                                                  Colors.grey.shade300.withOpacity(0.2),
-                                                  Colors.grey.shade300.withOpacity(0.2),
+                                                  Colors.grey.shade300.withOpacity(0.1),
                                                   Colors.grey.shade300.withOpacity(0.1),
                                                 ],
                                               ),
                                             ),
                                           ),
                                         ),
-                                        const PlanningView(),
                                       ],
                                     )
                                 ),

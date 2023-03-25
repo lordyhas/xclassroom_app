@@ -10,6 +10,8 @@ part 'auth_event.dart';
 
 part 'auth_state.dart';
 
+
+/// [AuthController] is an Authentication Manager with BLoC
 class AuthController
     extends Bloc<AuthEvent, AuthState> {
   AuthController(

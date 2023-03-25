@@ -59,3 +59,9 @@ class MyBehavior extends ScrollBehavior {
   }
 }
 
+class AppConstant{
+  static const name = "Espace Etudiant";
+  static const organisation = "Université Nouveaux Horizons";
+  static const shortName = " Espace Etudiant";
+}
+

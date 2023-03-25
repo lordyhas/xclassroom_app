@@ -6,6 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unhorizons/logic/values.dart';
+import 'package:unhorizons/src/admission_page.dart';
+import 'package:unhorizons/src/home_page.dart';
+import 'package:unhorizons/src/setting_page.dart';
 import 'package:unhorizons/widgets/course_list_tile.dart';
 
 part 'dashboard_part/side_drawer.dart';
@@ -81,8 +84,8 @@ class _HomeWebUIState extends State<HomeWebUI> {
             ),
 
             /// ----------------- SIDE PROFILE -----------------------
-            if (Responsive.of(context).isMaxSize ||  BlocProvider
-                .of<NavigationController>(context).isProfileNotOpen)
+            if (Responsive.of(context).isMaxSize &&
+                BlocProvider.of<NavigationController>(context).isProfileNotOpen)
               const SideUserInfoScreen(),
           ],
         ),

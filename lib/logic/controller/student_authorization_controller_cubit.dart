@@ -2,11 +2,13 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 
 
-
+/// Authorization
 enum StudentStatus {future, admission, registered, denied, fired, banished}
 
-class StudentController extends Cubit<StudentStatus> {
-  StudentController() : super(StudentStatus.future);
+
+/// [AuthorizationController] is a Student Authorization Controller
+class AuthorizationController extends Cubit<StudentStatus> {
+  AuthorizationController() : super(StudentStatus.future);
 
   void change(StudentStatus status){
     emit(status);
