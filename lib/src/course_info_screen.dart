@@ -127,7 +127,7 @@ class _CourseInfoScreenState extends State<CourseInfoScreen>
                                 ),
                                 Container(
                                   child: Row(
-                                    children: <Widget>[
+                                    children: const <Widget>[
                                       Text(
                                         '4.3',
                                         textAlign: TextAlign.left,
