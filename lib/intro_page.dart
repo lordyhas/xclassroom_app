@@ -98,7 +98,7 @@ class IntroPage extends StatelessWidget {
             PageViewModel(
               reverse: true,
               titleWidget: SizedBox.square(
-                dimension: 250,
+                dimension: 200,
                 child: Image.asset("assets/vectors/vector_cap2a.png"),
               ),
               //title: "Welcome to Student Space",

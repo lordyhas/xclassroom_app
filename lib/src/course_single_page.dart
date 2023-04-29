@@ -23,9 +23,7 @@ class CourseScreen extends StatelessWidget {
             Column(),
             Card(
               child: Wrap(
-                children: [
-
-                ],
+                children: const [],
               ),
             ),
             Column(),
