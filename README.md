@@ -11,7 +11,6 @@ A Flutter communication and planning tools project for unh student, goal student
 - get important messages related to your studies
 - get various official documents : enrolment attestations, ...
 
-
 ## Getting Started
 
 This project is a starting point for a Flutter application.

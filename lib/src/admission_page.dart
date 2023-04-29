@@ -18,7 +18,7 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
   bool isAlready = false;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         elevation: 0.0,
@@ -248,10 +248,11 @@ class _AdmissionScreenState extends State<AdmissionScreen> {
                                         "Décision de l’${AppConstant.organisation}",
                                         style: TextStyle(fontWeight: FontWeight.w700,),
                                       ),
-                                      subtitle: SelectableText("Le Service charger d'admission communique la "
-                                          "décision officielle de l'${AppConstant.organisation} "
-                                          "pour chacun des choix de programme par voie "
-                                          "électronique.",
+                                      subtitle: SelectableText(
+                                        "Le Service charger d'admission communique la "
+                                        "décision officielle de l'${AppConstant.organisation} "
+                                        "pour chacun des choix de programme par voie "
+                                        "électronique.",
                                       ),
                                     ),
                                     const Spacer(),
