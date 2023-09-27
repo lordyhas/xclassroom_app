@@ -1,6 +1,6 @@
 # Student Space | Espace Etudiant
 
-A Flutter communication and planning tools project for unh student, goal student can:
+A Flutter dynamic communication and planning tools project for student, goal student can:
 - make admission
 - see his notes
 - download a report card of his notes  
