@@ -1,4 +1,4 @@
-# UNH Student Space | Espace Etudiant
+# Student Space | Espace Etudiant
 
 A Flutter communication and planning tools project for unh student, goal student can:
 - make admission
